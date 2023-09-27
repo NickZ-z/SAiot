@@ -4,29 +4,294 @@
 {% block title %}
 SUAP - Sistema administrativo da Internet das Coisas
 {% endblock %}
- 
+
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/index.css'%}">
 <link rel="stylesheet" href="{% static 'css/base.css'%}">
+
 {% endblock %}
 
 {% block main %}
 
-<div class="main-div">
+<!-- <div class="main-div">
     <div class="painel-div">
         <div class="cabeçalho">
-            PORTA 67 
+            PORTA 67
         </div>
         <div class="data-div">
             <div class="ip-div">
-                IP: 
+                IP:
                 <p>10.108.105.23</p>
             </div>
             <div class="status-div">
                 Status:
-                
+
             </div>
+        </div>
+
+    </div>
+</div> -->
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <div class="col">
+        <div class="cabeçalho">
+            PORTA 67
+        </div>
+        <div class="card h-100">
+
+            <div class="card-body">
+                <div class="ip-div">
+                    <b>IP:</b>
+                    <p><b>10.108.105.23</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Função:</b>
+                    <p style="text-decoration: underline; "><b>PORTA</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Status:</b>
+                    <p style="color: rgb(255, 0, 0);">Fechado</p>
+                </div>
+            </div>
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Abrir"><i class="fa fa-edit"></i>Abrir Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Fechar"><i class="fa fa-trash"></i>Fechar Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Edit"><i class="fa fa-table">Editar</i></button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Delete"><i class="fa fa-trash"></i>Deletar</button>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="col">
+        <div class="cabeçalho">
+            PORTA 67
+        </div>
+        <div class="card h-100">
+
+            <div class="card-body">
+                <div class="ip-div">
+                    <b>IP:</b>
+                    <p><b>10.108.105.23</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Função:</b>
+                    <p style="text-decoration: underline; "><b>PORTA</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Status:</b>
+                    <p style="color: rgb(255, 0, 0);">Fechado</p>
+                </div>
+            </div>
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Abrir"><i class="fa fa-edit"></i>Abrir Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Fechar"><i class="fa fa-trash"></i>Fechar Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Edit"><i class="fa fa-table">Editar</i></button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Delete"><i class="fa fa-trash"></i>Deletar</button>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="col">
+        <div class="cabeçalho">
+            PORTA 67
+        </div>
+        <div class="card h-100">
+
+            <div class="card-body">
+                <div class="ip-div">
+                    <b>IP:</b>
+                    <p><b>10.108.105.23</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Função:</b>
+                    <p style="text-decoration: underline; "><b>PORTA</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Status:</b>
+                    <p style="color: rgb(255, 0, 0);">Fechado</p>
+                </div>
+            </div>
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Abrir"><i class="fa fa-edit"></i>Abrir Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Fechar"><i class="fa fa-trash"></i>Fechar Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Edit"><i class="fa fa-table">Editar</i></button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Delete"><i class="fa fa-trash"></i>Deletar</button>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="col">
+        <div class="cabeçalho">
+            PORTA 67
+        </div>
+        <div class="card h-100">
+
+            <div class="card-body">
+                <div class="ip-div">
+                    <b>IP:</b>
+                    <p><b>10.108.105.23</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Função:</b>
+                    <p style="text-decoration: underline; "><b>PORTA</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Status:</b>
+                    <p style="color: rgb(255, 0, 0);">Fechado</p>
+                </div>
+            </div>
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Abrir"><i class="fa fa-edit"></i>Abrir Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Fechar"><i class="fa fa-trash"></i>Fechar Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Edit"><i class="fa fa-table">Editar</i></button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Delete"><i class="fa fa-trash"></i>Deletar</button>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="col">
+        <div class="cabeçalho">
+            PORTA 67
+        </div>
+        <div class="card h-100">
+
+            <div class="card-body">
+                <div class="ip-div">
+                    <b>IP:</b>
+                    <p><b>10.108.105.23</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Função:</b>
+                    <p style="text-decoration: underline; "><b>PORTA</b></p>
+                </div>
+                <div class="status-div">
+                    <b>Status:</b>
+                    <p style="color: rgb(0, 255, 94);">Aberto</p>
+                </div>
+            </div>
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Abrir"><i class="fa fa-edit"></i>Abrir Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Fechar"><i class="fa fa-trash"></i>Fechar Porta</button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Edit"><i class="fa fa-table">Editar</i></button>
+                </li>
+                </li>
+                <li class="nav-item">
+                <li class="list-inline-item">
+                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                        data-placement="top" title="Delete"><i class="fa fa-trash"></i>Deletar</button>
+                </li>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
+
 {% endblock %}
