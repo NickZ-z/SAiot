@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SUAP - Sistema administrativo da Internet das Coisas
+{% endblock %}
+ 
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/index.css'%}">
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+{% endblock %}
+
+{% block main %}
+
+<div class="main-div">
+    <div class="painel-div">
+        <div class="cabeçalho">
+            PORTA 67 
+        </div>
+        <div class="data-div">
+            <div class="ip-div">
+                IP: 
+                <p>10.108.105.23</p>
+            </div>
+            <div class="status-div">
+                Status:
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

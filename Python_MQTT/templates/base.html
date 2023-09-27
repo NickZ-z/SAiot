@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block link %}
+    {% endblock %}
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    
+
+</head>
+
+<body>
+    <header>
+        
+        <nav>
+            <ul>
+               
+                <li ><a href="#" class="nav-div">Contato</a></li>
+                 <li><a href="" class="logo-div">suap</a></li>
+                <li ><a href="#" class="nav-div">Sobre Nós</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block main %}
+
+        {% endblock %}
+    </main>
+    <footer></footer>
+</body>
+
+</html>

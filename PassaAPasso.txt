@@ -1,0 +1,21 @@
+Objetivo - Enviar comandos via MQTT
+
+1º passo - Cliente consulta o FrontEnd, selecionando qual dispositivo (fechadura) deve ser comandado.
+
+2 passo - A interface (Front) envia os dados (destaque à entidade Boolean) para o Backend 
+(USAR PYTHON PARA MONTAR O PROJETO EM DJANGO).
+
+3 passo - Utilizando a chave primária (ID), o controlador (Back) executa uma função que resgata o endereço IP
+de tal dispositivo e muda seus status (aberto ou fechado em boolean), além de também resgatar essa informação em forma de variável, em um Banco de Dados
+(ANTES DE EXECUTAR O PROJETO, É IDEAL REGISTRAR TODOS OS DISPOSITIVOS POR IP NO BANCO DE DADOS), ademais, registra um 
+histórico de quem acessou, a data etc. 
+
+4 passo - O controlador (back) envia para um BROKER tais dados (LEMBRE-SE DE QUE O CONTROLADOR DEVE ESTAR "ASSINANDO" 
+O SERVIÇO DO PUBLICADOR, NESSE CASO, DA MICROCONTROLADORA ESP32, ALÉM DE ESTAREM NO MESMO TÓPICO - utilizar biblioteca
+python "paho" - ) utilizando o protocolo MQTT.
+
+5 passo - A esp32 - utilizar a biblioteca PubSubClient - interpreta os dados recebidos e os executa, caso tudo funcione como comandado, o dispositivo
+envia um aviso de confirmação pela rede, caso não, o mesmo acontece. Essa informação passará por todo processo novamente, so que de forma reversa, até chegar 
+na interface.
+
+  
