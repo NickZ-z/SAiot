@@ -36,3 +36,35 @@ body{
     display: inline-block;
     border-radius: 10px;
 }
+
+.btn-editar {
+    background-color: transparent; /* Remove a cor de fundo */
+    border-color: #C0DF00; /* Define a cor da borda */
+    color: #C0DF00; /* Define a cor do texto */
+}
+
+.btn-editar:hover {
+    background-color: #C0DF00; /* Adiciona cor de fundo ao passar o mouse */
+    color: #fff; /* Define a cor do texto ao passar o mouse */
+}
+
+.btn-deletar {
+    background-color: transparent; /* Remove a cor de fundo */
+    border-color: #D90000; /* Define a cor da borda */
+    color: #D90000; /* Define a cor do texto */
+}
+
+.btn-deletar:hover {
+    background-color: #D90000; /* Adiciona cor de fundo ao passar o mouse */
+    color: #fff; /* Define a cor do texto ao passar o mouse */
+}
+.btn-abrir {
+    background-color: transparent; /* Remove a cor de fundo */
+    border-color: #1F9D00; /* Define a cor da borda */
+    color: #1F9D00; /* Define a cor do texto */
+}
+
+.btn-abrir:hover {
+    background-color: #1F9D00; /* Adiciona cor de fundo ao passar o mouse */
+    color: #fff; /* Define a cor do texto ao passar o mouse */
+}

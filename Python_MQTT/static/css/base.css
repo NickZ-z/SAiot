@@ -12,6 +12,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .logo-div {
@@ -19,7 +20,15 @@ header {
     font-family: Arial, Helvetica, sans-serif;
     background-image: linear-gradient(to bottom, #ffffff, #333333);
     /* Cores do gradiente (vermelho para azul) */
-    -webkit-background-clip: text;
+   /* ... outros estilos ... */
+   background-image: linear-gradient(to bottom, #ffffff, #333333);
+   color: transparent;
+
+   /* Para navegadores WebKit (Safari, Chrome) */
+   -webkit-background-clip: text;
+
+   /* Para navegadores Firefox */
+   background-clip: text;
     color: transparent;
     /* Torna o texto transparente para que o gradiente apareça através dele */
     display: inline-block;
