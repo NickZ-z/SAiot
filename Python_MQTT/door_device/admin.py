@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import *
 
-@admin.register(Doors)
-class DoorsAdmin(admin.ModelAdmin):
+@admin.register(Device)
+class DeviceAdmin(admin.ModelAdmin):
     list_display = ("type",)
 
-@admin.register(Devices)
-class DevicesAdmin(admin.ModelAdmin):
-    list_display = ("ip","number_door","status","door",)
+@admin.register(Door)
+class DoorAdmin(admin.ModelAdmin):
+    list_display = ("name","ip","number_door","status","device",)

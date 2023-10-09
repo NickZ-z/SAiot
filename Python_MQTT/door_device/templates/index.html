@@ -52,41 +52,46 @@ SUAP - Sistema administrativo da Internet das Coisas
 
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-
-        <div class="col">
+        {% for device in devices %}
+        <form class="col">
             <div class="card-header cabeçalho">
-                PORTA 67
+                PORTA {{ device.number_door }} ({{ device.name }})
             </div>
             <div class="card mb-3">
                 
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="ip"><b>IP:</b></div>
-                        <div class="ip-endereço"><b>10.108.105.23</b></div>
+                        <div class="ip-endereço"><b>{{ device.ip }}</b></div>
                     </div>
                     <div class="funcao-div">
                         <div class="d-flex justify-content-between">
                             <div class="funcao"><b>Função:</b></div>
-                            <div class="porta"><b style="text-decoration: underline; ">PORTA</b></div>
+                            <div class="porta"><b style="text-decoration: underline; ">{{device.device}}</b></div>
                         </div>
                     </div>
                     <div class="status-div">
                         <div class="d-flex justify-content-between">
                             <div class="funcao"><b>Status:</b></div>
-                            <div class="porta"><p style="color: rgb(0, 255, 72);">Aberta</p></div>
+                            {% if device.status == 'aberta'%}
+                            <div class="porta"><p style="color: rgb(0, 255, 72);">{{device.status}}</p></div>
+                            {% elif device.status == 'fechada'%}
+                            <div class="porta"><p style="color: rgb(255, 0, 0);">{{device.status}}</p></div>
+                            {%endif%}
                         </div>
                     </div>
                 </div>
                 <ul class="nav nav-pills card-footer justify-content-between">
                     <li class="nav-item">
-                        <button class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
+                        {% if device.status == 'fechada' %}
+                        <a href="{% url 'msg' device.id %}" class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
                             <i class="fa fa-edit"></i> Abrir Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
-                            <i class="fa fa-trash"></i> Fechar Porta
-                        </button>
+                        </a>
+                        {% elif device.status == 'aberta' %}
+                            <a href="{% url 'msg' device.id %}" class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
+                                <i class="fa fa-trash"></i> Fechar Porta
+                            </a>
+                            {%endif%}
                     </li>
                     <li class="nav-item">
                         <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
@@ -101,257 +106,9 @@ SUAP - Sistema administrativo da Internet das Coisas
                     </li>
                 </ul>
             </div>
-        </div>
+        </form>
         
-        <div class="col">
-            <div class="card-header cabeçalho">
-                PORTA 67
-            </div>
-            <div class="card mb-3">
-                
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="ip"><b>IP:</b></div>
-                        <div class="ip-endereço"><b>10.108.105.23</b></div>
-                    </div>
-                    <div class="funcao-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Função:</b></div>
-                            <div class="porta"><b style="text-decoration: underline; ">PORTA</b></div>
-                        </div>
-                    </div>
-                    <div class="status-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Status:</b></div>
-                            <div class="porta"><p style="color: red;">Fechado</p></div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="nav nav-pills card-footer justify-content-between">
-                    <li class="nav-item">
-                        <button class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
-                            <i class="fa fa-edit"></i> Abrir Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
-                            <i class="fa fa-trash"></i> Fechar Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
-                            <i class="fa fa-table"></i> Editar
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Deletar">
-                            <i class="fa fa-trash"></i> Deletar
-                        </button>
-                        
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card-header cabeçalho">
-                PORTA 67
-            </div>
-            <div class="card mb-3">
-                
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="ip"><b>IP:</b></div>
-                        <div class="ip-endereço"><b>10.108.105.23</b></div>
-                    </div>
-                    <div class="funcao-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Função:</b></div>
-                            <div class="porta"><b style="text-decoration: underline; ">PORTA</b></div>
-                        </div>
-                    </div>
-                    <div class="status-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Status:</b></div>
-                            <div class="porta"><p style="color: rgb(0, 255, 72);">Aberta</p></div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="nav nav-pills card-footer justify-content-between">
-                    <li class="nav-item">
-                        <button class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
-                            <i class="fa fa-edit"></i> Abrir Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
-                            <i class="fa fa-trash"></i> Fechar Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
-                            <i class="fa fa-table"></i> Editar
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Deletar">
-                            <i class="fa fa-trash"></i> Deletar
-                        </button>
-                        
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card-header cabeçalho">
-                PORTA 67
-            </div>
-            <div class="card mb-3">
-                
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="ip"><b>IP:</b></div>
-                        <div class="ip-endereço"><b>10.108.105.23</b></div>
-                    </div>
-                    <div class="funcao-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Função:</b></div>
-                            <div class="porta"><b style="text-decoration: underline; ">PORTA</b></div>
-                        </div>
-                    </div>
-                    <div class="status-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Status:</b></div>
-                            <div class="porta"><p style="color: red;">Fechado</p></div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="nav nav-pills card-footer justify-content-between">
-                    <li class="nav-item">
-                        <button class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
-                            <i class="fa fa-edit"></i> Abrir Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
-                            <i class="fa fa-trash"></i> Fechar Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
-                            <i class="fa fa-table"></i> Editar
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Deletar">
-                            <i class="fa fa-trash"></i> Deletar
-                        </button>
-                        
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card-header cabeçalho">
-                PORTA 67
-            </div>
-            <div class="card mb-3">
-                
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="ip"><b>IP:</b></div>
-                        <div class="ip-endereço"><b>10.108.105.23</b></div>
-                    </div>
-                    <div class="funcao-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Função:</b></div>
-                            <div class="porta"><b style="text-decoration: underline; ">PORTA</b></div>
-                        </div>
-                    </div>
-                    <div class="status-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Status:</b></div>
-                            <div class="porta"><p style="color: red;">Fechado</p></div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="nav nav-pills card-footer justify-content-between">
-                    <li class="nav-item">
-                        <button class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
-                            <i class="fa fa-edit"></i> Abrir Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
-                            <i class="fa fa-trash"></i> Fechar Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
-                            <i class="fa fa-table"></i> Editar
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Deletar">
-                            <i class="fa fa-trash"></i> Deletar
-                        </button>
-                        
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card-header cabeçalho">
-                PORTA 67
-            </div>
-            <div class="card mb-3">
-                
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="ip"><b>IP:</b></div>
-                        <div class="ip-endereço"><b>10.108.105.23</b></div>
-                    </div>
-                    <div class="funcao-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Função:</b></div>
-                            <div class="porta"><b style="text-decoration: underline; ">PORTA</b></div>
-                        </div>
-                    </div>
-                    <div class="status-div">
-                        <div class="d-flex justify-content-between">
-                            <div class="funcao"><b>Status:</b></div>
-                            <div class="porta"><p style="color: rgb(0, 255, 72);">Aberta</p></div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="nav nav-pills card-footer justify-content-between">
-                    <li class="nav-item">
-                        <button class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
-                            <i class="fa fa-edit"></i> Abrir Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
-                            <i class="fa fa-trash"></i> Fechar Porta
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
-                            <i class="fa fa-table"></i> Editar
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Deletar">
-                            <i class="fa fa-trash"></i> Deletar
-                        </button>
-                        
-                    </li>
-                </ul>
-            </div>
-        </div>
+      {% endfor %}
 
     </div>
 </div>

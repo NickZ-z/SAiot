@@ -11,4 +11,5 @@ class Door(models.Model):
     status = models.CharField(max_length=255)
     device = models.ForeignKey(Device,on_delete=models.CASCADE)
 
-
+    def __str__(self) -> str:
+          return f"Nome: {self.name}, IP: {self.ip}, Número: {self.number_door}, Status: {self.status}, Device: {self.device}"
