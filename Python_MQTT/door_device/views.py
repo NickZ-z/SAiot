@@ -10,9 +10,11 @@ def index(request):
 
     return render(request,'index.html',{ 'devices':devices_on_door})
 
-def verify_data():  
+def verify_data(status, keeper):  
+    device = get_object_or_404(Door, id)
     Subscriber.run()
-
+    if Subscriber.timeout_event() == False:
+        status = keeper
     data = Subscriber.get_data()
     print(data)
 
@@ -25,16 +27,19 @@ def send_manssege(request, id):
     print(id)
     device = get_object_or_404(Door, id=id)
     print(str(device))
+    verify_device = device.status
     if device.status == 'aberta':
         device.status = 'fechada'
         print(str(device))
-        device.save()
+
+        
     elif device.status == 'fechada':
-        device.status = 'aberta'
+        device.status = 'fechada'
         print(str(device))
-        device.save()
+      
+    
     Publisher.run(str(device))
-    verify_data()
-    # Redirecione para outra view ou página após a edição
-    return redirect(index)  # Redirecione para outra view(request):
+    Subscriber.run()
+    
+    return redirect(index)
     
