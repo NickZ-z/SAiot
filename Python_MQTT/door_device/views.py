@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect,get_object_or_404,HttpResponse
 
 from .models import *
 
@@ -11,35 +11,33 @@ def index(request):
     return render(request,'index.html',{ 'devices':devices_on_door})
 
 def verify_data(status, keeper):  
-    device = get_object_or_404(Door, id)
     Subscriber.run()
-    if Subscriber.timeout_event() == False:
-        status = keeper
-    data = Subscriber.get_data()
+    data = Subscriber.get_dataMQTT()
     print(data)
-
-   
+    if data != 'Conexão confirmada':
+        status = keeper
+        return False
 
 
 
 def send_manssege(request, id):
     
-    print(id)
     device = get_object_or_404(Door, id=id)
-    print(str(device))
+    
     verify_device = device.status
     if device.status == 'aberta':
         device.status = 'fechada'
-        print(str(device))
+        device.save()
 
         
     elif device.status == 'fechada':
-        device.status = 'fechada'
-        print(str(device))
-      
+        device.status = 'aberta'
+        device.save()
+    Publisher.run(device.status)
     
-    Publisher.run(str(device))
-    Subscriber.run()
-    
+    if verify_data(device.status,verify_device) is False:
+        print(device.status)
+        return HttpResponse("deu ruim")
+
     return redirect(index)
     
