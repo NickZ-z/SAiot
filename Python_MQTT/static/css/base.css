@@ -1,22 +1,16 @@
-body {
-    margin: 0px;
-    padding: 0;
-    box-sizing: border-box;
-    position: relative;
-
+footer {
+    position:relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  
 }
-
-header {
-    background-color: #292929;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+.nav a{
+    font-size: 16px;
 }
 
 .logo-div {
-    font-size: 50px;
+    font-size: 60px!important;
     font-family: Arial, Helvetica, sans-serif;
     background-image: linear-gradient(to bottom, #ffffff, #333333);
     /* Cores do gradiente (vermelho para azul) */
@@ -36,27 +30,12 @@ header {
     padding: 20px;
 
 }
-
-nav ul {
-    list-style: none;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-    /* Espaçamento entre os itens do menu */
-}
-
-.nav-div {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-}
-
-.nav-div:hover {
-    opacity: 20%;
-    ;
-    /* Cor do link quando o mouse passar por cima (vermelho) */
+#perfil-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #292929;
+    font-size: 16px;
+    width: 123px;
+    height: 35px;
 }
