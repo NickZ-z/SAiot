@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SUAP - Sistema administrativo da Internet das Coisas
+{% endblock %}
+
+{% block link %}
+
+
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+            <img src="{% static 'images/teste.jpg' %}" alt="Imagem" class="img-fluid">
+        </div>
+        
+        <div class="col-md-8">
+           
+            <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="card-body">
+                    <h2 class="card-title">Cadastro de Dispositivos</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ device_form.as_p }}
+                        <button type="submit" name="cadastrar_device" class="btn btn-primary">Cadastrar Device</button>
+                    </form>
+                    <hr>
+                    <h2 class="card-title">Cadastro de Porta</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ door_form.as_p }}
+                        <button type="submit" name="cadastrar_door" class="btn btn-primary">Cadastrar Door</button>
+                        <a href="{% url 'index' %}" class="btn btn-btn-primary">Voltar para a página inicial</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-
+from .forms import DoorForm, DeviceForm
 from .models import *
 
 from mqtt_protocol.publisher import *
@@ -17,6 +17,21 @@ def verify_data():
     print(data)
 
    
+def cadastro(request):
+    device_form = DeviceForm()
+    door_form = DoorForm()
+
+    if request.method == 'POST':
+        if 'cadastrar_device' in request.POST:
+            device_form = DeviceForm(request.POST)
+            if device_form.is_valid():
+                device_form.save()
+        elif 'cadastrar_door' in request.POST:
+            door_form = DoorForm(request.POST)
+            if door_form.is_valid():
+                door_form.save()
+    
+    return render(request, 'cadastro.html', {'device_form': device_form, 'door_form': door_form})
 
 
 

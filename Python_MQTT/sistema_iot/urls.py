@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index,name='index'),
     path('teste/<int:id>/', send_manssege, name='msg'),
+    path('cadastro/', cadastro, name='cadastro'),
    
 ]
