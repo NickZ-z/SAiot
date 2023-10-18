@@ -10,10 +10,9 @@ def index(request):
 
     return render(request,'index.html',{ 'devices':devices_on_door})
 
-def verify_data():  
+def verify_data(status, keeper):  
     Subscriber.run()
-
-    data = Subscriber.get_data()
+    data = Subscriber.get_dataMQTT()
     print(data)
 
    
@@ -37,19 +36,22 @@ def cadastro(request):
 
 def send_manssege(request, id):
     
-    print(id)
     device = get_object_or_404(Door, id=id)
-    print(str(device))
+    
+    verify_device = device.status
     if device.status == 'aberta':
         device.status = 'fechada'
-        print(str(device))
         device.save()
+
+        
     elif device.status == 'fechada':
         device.status = 'aberta'
-        print(str(device))
         device.save()
-    Publisher.run(str(device))
-    verify_data()
-    # Redirecione para outra view ou página após a edição
-    return redirect(index)  # Redirecione para outra view(request):
+    Publisher.run(device.status)
+    
+    if verify_data(device.status,verify_device) is False:
+        print(device.status)
+        return HttpResponse("deu ruim")
+
+    return redirect(index)
     
