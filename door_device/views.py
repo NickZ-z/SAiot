@@ -12,11 +12,7 @@ fail = False
 
 def index(request): 
     devices_on_door = Door.objects.all()
-    
-    paginator = Paginator(devices_on_door, 3)
-    pagina = request.GET.get('page')
-    itens = paginator.get_page(pagina)
-    return render(request,'index.html',{ 'devices':itens, 'fail': fail})
+    return render(request, 'index.html', {'devices': devices_on_door, 'fail': fail})
 
 def verify_data():  
     
@@ -60,12 +56,7 @@ def send_manssege(request, id):
     fail == False
     return redirect(index)
 
-def index(request): 
-    devices_on_door = Door.objects.all()
-    paginator = Paginator(devices_on_door, 3)
-    pagina = request.GET.get('page')
-    itens = paginator.get_page(pagina)
-    return render(request,'index.html',{ 'devices':itens})
+
 
 
 def faqs(request):

@@ -12,6 +12,9 @@ SUAP - Sistema administrativo da Internet das Coisas
 
 {% block main %}
 
+
+
+
 {% if user.is_authenticated %}
 
 <div class="container mt-5 d-flex align-items-center">
@@ -42,24 +45,28 @@ SUAP - Sistema administrativo da Internet das Coisas
                 <input type="text" id="room-filter" name="room_filter" class="form-control">
             </div>
             <div class="col-md-auto d-flex align-items-center justify-content-center pt-2 ">
-                <button id="btn-filter" type="submit" class="btn btn-primary  d-flex align-items-center justify-content-center mt-2 ">Filtrar</button>
+                <button id="btn-filter" type="submit"
+                    class="btn btn-primary  d-flex align-items-center justify-content-center mt-2 ">Filtrar</button>
             </div>
             <div style="width: 230px;" class="ms-3 col-md-8 d-flex align-items-center justify-content-end">
-                <a id="btn-add" href="{% url 'search_d'%}" type="submit" class="btn btn-primary d-flex align-items-center justify-content-center w-100 mt-3 "> <Strong>+ Adicionar Dispositivo</Strong></a>
+                <a id="btn-add" href="{% url 'search_d'%}" type="submit"
+                    class="btn btn-primary d-flex align-items-center justify-content-center w-100 mt-3 "> <Strong>+
+                        Adicionar Dispositivo</Strong></a>
             </div>
         </div>
     </form>
 </div>
 
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+    <div class="row owl-carousel owl-theme">
+
         {% for device in devices %}
-        <form class="col">
+        <form class="col item">
             <div class="card-header cabeçalho w-auto">
                 PORTA {{ device.number_door }} <Strong> ({{ device.name }})</Strong>
             </div>
-            <div class="card mb-3">
-                
+            <div class="card">
+
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="ip"><b>IP:</b></div>
@@ -75,9 +82,13 @@ SUAP - Sistema administrativo da Internet das Coisas
                         <div class="d-flex justify-content-between">
                             <div class="funcao"><b>Status:</b></div>
                             {% if device.status == 'aberta'%}
-                            <div class="porta"><p style="color: rgb(0, 255, 72);">Aberta</p></div>
+                            <div class="porta">
+                                <p style="color: rgb(0, 255, 72);">Aberta</p>
+                            </div>
                             {% elif device.status == 'fechada'%}
-                            <div class="porta"><p style="color: rgb(255, 0, 0);">Fechada</p></div>
+                            <div class="porta">
+                                <p style="color: rgb(255, 0, 0);">Fechada</p>
+                            </div>
                             {%endif%}
                         </div>
                     </div>
@@ -85,54 +96,40 @@ SUAP - Sistema administrativo da Internet das Coisas
                 <ul class="nav nav-pills card-footer justify-content-between">
                     <li class="nav-item">
                         {% if device.status == 'fechada' %}
-                        <a href="{% url 'msg' device.id %}" class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
+                        <a href="{% url 'msg' device.id %}" class="btn btn-success btn-sm btn-abrir" type="button"
+                            data-toggle="tooltip" data-placement="top" title="Abrir">
                             <i class="fa fa-edit"></i> Abrir Porta
                         </a>
                         {% elif device.status == 'aberta' %}
-                            <a href="{% url 'msg' device.id %}" class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
-                                <i class="fa fa-trash"></i> Fechar Porta
-                            </a>
-                            {%endif%}
+                        <a href="{% url 'msg' device.id %}" class="btn btn-danger btn-sm btn-deletar" type="button"
+                            data-toggle="tooltip" data-placement="top" title="Fechar">
+                            <i class="fa fa-trash"></i> Fechar Porta
+                        </a>
+                        {%endif%}
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip"
+                            data-placement="top" title="Editar">
                             <i class="fa fa-table"></i> Editar
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Deletar">
+                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip"
+                            data-placement="top" title="Deletar">
                             <i class="fa fa-trash"></i> Deletar
                         </button>
-                    {% if fail == True %}
-                    <p for="">Não foi recebido a mensagem de confirmação</p>
-                    {% endif %}
+                        {% if fail == True %}
+                        <p for="">Não foi recebido a mensagem de confirmação</p>
+                        {% endif %}
                     </li>
                 </ul>
             </div>
         </form>
-        
-      {% endfor %}
-
+        {% endfor %}
     </div>
 </div>
 
-<div id="pagination" class="d-flex justify-content-center">
-    <span id="span-pag" class="step-links d-flex justify-content-between " {% if devices.number != 1 and devices.number != devices.paginator.num_pages %} style="width: 500px;"{%else%} style="width: 250px;" {%endif%}>
-        {% if devices.has_previous %}
-            <a style="text-decoration: none;" class="d-flex mb-3 " href="?page=1"><p class=" p-1 ">&laquo; Primeiro</p></a>
-            <a style="text-decoration: none;" class="d-flex mb-3 " href="?page={{ devices.previous_page_number }}"><p class=" p-1 ">Anterior</p></a>
-        {% endif %}
 
-        {% if devices.paginator.count >= 4 %}
-        <span class="h-50 m-1">{{ devices.number }} de {{ devices.paginator.num_pages }}</span>
-        {% endif %}
-
-        {% if devices.has_next %}
-            <a style="text-decoration: none;" class="d-flex mb-3 " href="?page={{ devices.next_page_number }}"><p class=" p-1 ">Próximo</p></a>
-            <a style="text-decoration: none;" class="d-flex mb-3 "href="?page={{ devices.paginator.num_pages }}"><p class=" p-1">Último &raquo;</p></a>
-        {% endif %}
-    </span>
-</div>
 {% else %}
 <div class="d-flex justify-content-center align-items-center" style="height: 290px;">
     <p>
