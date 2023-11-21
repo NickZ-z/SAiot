@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SUAP - Sistema administrativo da Internet das Coisas
+{% endblock %}
+
+{% block link %}
+
+
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+           <div>
+            <h4 class="mb-4">Informações necessárias para conectar um Dispositivo:</h4>
+            <ul class="list-unstyled">
+                <li><strong class="text-danger">BROKER</strong> = 'www.maqiatto.com'</li>
+                <li><strong class="text-danger">PORT</strong> = 1883</li>
+                <li><strong class="text-danger">TOPIC</strong> = "nicholas.o@escolar.ifrn.edu.br/T1"</li>
+        
+            </ul>
+           </div>
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="card-body rounded" style="background-color: #d9d9d9; box-shadow: 1px 1px 3px #000000;">
+                    <div class="d-flex justify-content-center">
+                        <h2 class="card-title fw-bold">Cadastro de Dispositivos</h2>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <div class="mb-2">
+                                <label for="">Endereço Ip:</label>
+                            </div>
+                            <div>
+                                {{ door_form.ip }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            {{ door_form.name.label_tag }}
+                            {{ door_form.name }}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ door_form.status.label_tag }}
+                            {{ door_form.status }}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ door_form.number_door.label_tag }}
+                            {{ door_form.number_door }}
+                        </div>
+                        <button type="submit" name="cadastrar_door" class="btn btn-primary">Cadastrar
+                            Dispositivo</button>
+                        <a href="{% url 'index' %}" class="btn btn-btn-primary">Voltar para a página inicial</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock%}

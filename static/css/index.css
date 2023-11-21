@@ -1,0 +1,123 @@
+.cabeçalho{
+    background-color: #ddd;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 250px;
+    padding: 5px;
+    color: #444;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+   
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#btn-add{
+    width: 500px;
+    border-radius: 20px;
+    border-color: #1F9D00;
+    border-width: 2px;
+    background-color: #fff;
+    color: #1F9D00;
+}
+#btn-add:hover{
+    background-color: #1F9D00;
+    color: #fff;
+}
+.painel-div{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: 20px;
+}  
+.data-div{
+    border-style: solid;
+    border-width: 2px;
+    background-color: white;
+
+}
+#btn-filter{
+    box-shadow: 0px 1px 4px #000000;
+    width: 60px;
+    height: 23px;
+    border-color: #1F9D00;
+    border-radius: 20px;
+    color: white;
+    background-color: #1F9D00;
+}
+#btn-filter:hover{
+    box-shadow: 0px 0px 0px ;
+    background-color: #fff;
+    color: #1F9D00;
+
+}
+body{
+ background-color: rgb(235, 235, 235);
+}
+.status-div a{
+    text-decoration: none;
+    color: black;
+    margin: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(0, 255, 13);
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.btn-editar {
+    background-color: transparent; /* Remove a cor de fundo */
+    border-color: #C0DF00; /* Define a cor da borda */
+    color: #C0DF00; /* Define a cor do texto */
+}
+
+.btn-editar:hover {
+    background-color: #C0DF00; /* Adiciona cor de fundo ao passar o mouse */
+    color: #fff; /* Define a cor do texto ao passar o mouse */
+}
+
+.btn-deletar {
+    background-color: transparent; /* Remove a cor de fundo */
+    border-color: #D90000; /* Define a cor da borda */
+    color: #D90000; /* Define a cor do texto */
+}
+
+.btn-deletar:hover {
+    background-color: #D90000; /* Adiciona cor de fundo ao passar o mouse */
+    color: #fff; /* Define a cor do texto ao passar o mouse */
+}
+.btn-abrir {
+    background-color: transparent; /* Remove a cor de fundo */
+    border-color: #1F9D00; /* Define a cor da borda */
+    color: #1F9D00; /* Define a cor do texto */
+}
+
+.btn-abrir:hover {
+    background-color: #1F9D00; /* Adiciona cor de fundo ao passar o mouse */
+    color: #fff; /* Define a cor do texto ao passar o mouse */
+}
+#pagination p{
+    color:#1F9D00 ;
+    border-radius: 5px;
+    border-color: #1F9D00;
+      }
+  #pagination p:hover{
+  background-color: #1F9D00;
+  color: white;
+
+  border-color: #1F9D00;
+  }
+
+@media (max-width: 768px) {
+    #btn-filter{
+        width: 230px;
+        margin: 10px;    
+    }
+    #pagination{
+        display: flex;
+        justify-content: center
+    }
+    #span-pag{
+        margin: 0!important;
+    }
+}
+    

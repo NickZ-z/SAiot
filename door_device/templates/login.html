@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SUAP - Sistema administrativo da Internet das Coisas
+{% endblock %}
+
+{% block link %}
+
+
+{% endblock %}
+
+{% block main %}
+
+
+<div class="d-flex justify-content-center align-items-center" style="height: 290px;">
+    <form action="{% url 'login'%}" method="post">
+        {% csrf_token %}
+        <label for="username">
+            Matricula
+        </label>
+        <input type="text" name="matricula" id="username">
+        <label for="password">
+            Senha
+        </label>
+        <input type="password" name="senha" id="password">
+        <button type="submit" >Entrar</button>
+    </form>
+</div>
+
+
+
+{% endblock %}

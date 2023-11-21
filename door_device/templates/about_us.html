@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SUAP - Sistema administrativo da Internet das Coisas
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/logout_index.css' %}">
+
+{% endblock %}
+
+{% block main %}
+
+
+<div class="container mt-4">
+    <h1 class="fw-bold">Sobre Nós</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <img src="imagem-sobre-nos-1.jpg" class="card-img-top" alt="Imagem 1">
+                <div class="card-body">
+                    <h5 class="card-title">Nicholas Oliveira</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <img src="imagem-sobre-nos-2.jpg" class="card-img-top" alt="Imagem 2">
+                <div class="card-body">
+                    <h5 class="card-title">Hugo José</h5>
+                    <p class="card-text">Nullam scelerisque, metus eget iaculis viverra.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

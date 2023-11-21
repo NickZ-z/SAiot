@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SUAP - Sistema administrativo da Internet das Coisas
+{% endblock %}
+
+{% block link %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{% static 'js/search_btn.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+
+{% block main %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+            <div>
+                <h4 class="mb-4">Informações necessárias para conectar um Dispositivo:</h4>
+                <ul class="list-unstyled">
+                    <li><strong class="text-danger">BROKER</strong> = 'www.maqiatto.com'</li>
+                    <li><strong class="text-danger">PORT</strong> = 1883</li>
+                    <li><strong class="text-danger">TOPIC</strong> = "nicholas.o@escolar.ifrn.edu.br/T1"</li>
+                    <li><strong class="text-danger">TOKEN</strong> = "Conexão confirmada"</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="card-body rounded" style="background-color: #d9d9d9; box-shadow: 1px 1px 3px #000000;">
+                    <div class="d-flex justify-content-center">
+                        <h2 class="card-title fw-bold">Localizar Dispositivos</h2>
+                    </div>
+                    <div>
+                        <p><STRong class="text-warning" style="text-shadow: 1px 1px 3px black;">ATENÇÃO </STRong>: é
+                            necessário que o Dispositivo esteja inscrito no mesmo 'topic' para cadastrar no sistema.
+                            Além de retornar o TOKEN para confirmar o processo.</p>
+                        <hr>
+
+                        <div class="d-flex  flex-column align-items-center">
+                            <div class="m-5">
+                                <button href="" id="button_search">
+                                    Localizar um dispositivo
+                                </button>
+                            </div>
+                            <label style="display: none;" id="loading" for="">Procurando dispositivo...</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock%}

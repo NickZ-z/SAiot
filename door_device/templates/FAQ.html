@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SUAP - Sistema administrativo da Internet das Coisas
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/logout_index.css' %}">
+
+{% endblock %}
+
+{% block main %}
+
+
+<div class="container mt-4">
+    <h1 class="text-center">Perguntas Frequentes</h1>
+
+    <!-- Pergunta 1 -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#pergunta1">
+                    Como eu faço algo?
+                </button>
+            </h5>
+        </div>
+        <div id="pergunta1" class="collapse show">
+            <div class="card-body">
+                Resposta para a pergunta.
+            </div>
+        </div>
+    </div>
+
+    <!-- Pergunta 2 -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#pergunta2">
+                    Como eu faço algo?
+                </button>
+            </h5>
+        </div>
+        <div id="pergunta2" class="collapse">
+            <div class="card-body">
+                Resposta para a pergunta.
+            </div>
+        </div>
+    </div>
+
+    <!-- Pergunta 3 -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#pergunta3" >
+                    Como eu faço algo?
+                </button>
+            </h5>
+        </div>
+        <div id="pergunta3" class="collapse">
+            <div class="card-body">
+                Resposta para a pergunta.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}
