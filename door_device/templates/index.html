@@ -100,9 +100,9 @@ SUAP - Sistema administrativo da Internet das Coisas
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Deletar">
+                        <a class="btn btn-danger btn-sm btn-deletar" href="{% url 'deletar_device' device.id %}" >
                             <i class="fa fa-trash"></i> Deletar
-                        </button>
+                        </a>
                     {% if fail == True %}
                     <p for="">Não foi recebido a mensagem de confirmação</p>
                     {% endif %}

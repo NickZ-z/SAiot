@@ -47,6 +47,34 @@ SUAP - Sistema administrativo da Internet das Coisas
                                 </button>
                             </div>
                             <label style="display: none;" id="loading" for="">Procurando dispositivo...</label>
+                            <div id="founded_device">
+                                <h4>Dispositivo Encontrado</h4>
+                                <h5 class="d-flex flex-row "><Strong style="margin-right: 10px;">IP:</Strong>
+                                    <p style="color: rgb(47, 94, 0);">10.10.010.1</p>
+                                </h5>
+                                <h5> <Strong>Função do dispositivo:</Strong>
+                                    <p style="color: red;">Porta</p>
+                                </h5>
+                                <div class="d-flex justify-content-start m-4">
+
+
+                                    <input type="text" id="Nome_device" placeholder="Digite o Nome:">
+
+
+                                    <input type="text" id="Nome_device" placeholder="Digite o Número da porta:">
+
+                                </div>
+                                <div class="d-flex justify-content-around mt-3">
+                                    <button id="save_button">Salvar dispositivo</button>
+                                    <button id="cancel_button">Cancelar dispositivo</button>
+                                </div>
+                            </div>
+
+                            <div id="notfounded_device" style="display: none;">
+                                <h4 style="text-align: center;">Dispositivo <p style="color: red;">NÃO CONFIGURADO</p>
+                                </h4>
+
+                            </div>
                         </div>
                     </div>
                 </div>

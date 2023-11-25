@@ -1,7 +1,7 @@
 import random
 import threading
 from paho.mqtt import client as mqtt_client
-
+import json
 
 broker = 'www.maqiatto.com'
 port = 1883
@@ -46,8 +46,9 @@ def subscribe(client: mqtt_client):
         global data
         
         data = msg.payload.decode() 
-        print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
-
+        
+        print("Mensagem recebida:", data)
+    
         client.disconnect()
         
         

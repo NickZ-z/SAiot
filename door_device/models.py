@@ -5,10 +5,10 @@ class Device(models.Model):
     def __str__(self):
         return self.type
 class Door(models.Model):
-    name = models.CharField(max_length=255)
-    ip = models.CharField(max_length=255)
-    number_door = models.IntegerField()
-    status = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, null=True)
+    ip = models.CharField(max_length=255, null=True)
+    number_door = models.IntegerField(null=True)
+    status = models.CharField(max_length=255, null=True)
     device = models.ForeignKey(Device,on_delete=models.CASCADE)
 
     def __str__(self) -> str:

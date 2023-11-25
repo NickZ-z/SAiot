@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import path
 from door_device.views import *
 import include
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,5 +17,9 @@ urlpatterns = [
     path('sobre_nós/', about_us, name='about_us'),
     path('FAQs/', faqs, name='faqs'),
     path('localizar_IoT/localizar/', faqs, name='localizando'),
-    path('confirm/',verify_device, name='verify_device')
+    path('deletar/<int:device_id>/', deletar_device, name='deletar_device'),
+     
+    path('confirm/',verify_device, name='verify_device'),
+    
+    path('oauth/', include('social_django.urls',)),
 ]

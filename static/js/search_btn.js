@@ -2,18 +2,19 @@ $(document).ready(function () {
     $("#button_search").click(function () {
         $("#button_search").hide();
         $("#loading").show();
+
         $.ajax({
             url: '/confirm/', // URL da sua view Django que processará a confirmação
             type: 'GET',       // Método HTTP, neste caso é um pedido GET
             success: function (data) {
-                // Função chamada em caso de sucesso na requisição
+                console.log(data.confirmation)
                 if (data.confirmation) {
-                    // Supondo que a confirmação foi recebida com sucesso.
-                    $("#button_search").show();
+                    $("#founded_device").show();
                     $("#loading").hide();
                 } else {
                     // Lógica para o caso em que a confirmação não foi recebida
-                    console.error("Falha na confirmação.");
+                    $("#loading").hide();
+                    $("#notfounded_device").show();
                     // Se desejar, você pode ocultar #loading aqui também
                 }
             },

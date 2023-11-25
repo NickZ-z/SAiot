@@ -1,6 +1,5 @@
 from social_core.backends.oauth import BaseOAuth2
 
-# coding: utf-8
 
 class SuapOAuth2(BaseOAuth2):
     name = 'suap'

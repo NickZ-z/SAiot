@@ -7,7 +7,7 @@ from mqtt_protocol.publisher import *
 from mqtt_protocol.subscribe import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
+import ipaddress
 fail = False
 
 def index(request): 
@@ -18,6 +18,17 @@ def index(request):
     itens = paginator.get_page(pagina)
     return render(request,'index.html',{ 'devices':itens, 'fail': fail})
 
+def is_valid_ip(ip_str):
+    try:
+        ipaddress.IPv4Address(ip_str)
+        return True
+    except ipaddress.AddressValueError:
+        try:
+            ipaddress.IPv6Address(ip_str)
+            return True
+        except ipaddress.AddressValueError:
+            return False
+        
 def verify_data():  
     
     Subscriber.run()
@@ -27,12 +38,19 @@ def verify_data():
         
         return False
 def verify_device(request):
-    
         Subscriber.run()
         data = Subscriber.get_dataMQTT()
         print(data)
-        if data != 'confirmado':
+        ip_device = data.get('ip')
+        function_device = data.get('funcao')
+        
+        print(ip_device)
+        if is_valid_ip(ip_device) and function_device == 'porta':
+            device = Device.objects.get(type='Porta')
+            new_device = Door(ip=ip_device, device=device)
+            new_device.save()
             resposta = {'confirmation': True}
+
             return JsonResponse(resposta)
         else:
             return JsonResponse({'confirmation': False})
@@ -109,4 +127,12 @@ def cadastro(request):
                 door_form.save()
     
     return render(request, 'add_device.html', {'device_form': device_form, 'door_form': door_form})
-   
+def deletar_device(request, device_id):
+    # Obter a instância da porta ou retornar uma resposta 404 se não existir
+    device = get_object_or_404(Door, id=device_id)
+
+    # Deletar a instância da porta
+    device.delete()
+
+    # Redirecionar para outra página após a exclusão
+    return redirect(index)

@@ -55,6 +55,7 @@ footer {
     font-size: 16px;
     width: 200px;
     height: 35px;
+    transition: background-color 0.3s;
 }
 #perfil-h1{
     border-width: 1px;
@@ -70,8 +71,14 @@ footer {
     font-size: 16px;
     width: 200px;
     height: 35px;
+    transition: background-color 0.3s;
 }
 #perfil-h1:hover{
+    border-color: #35ff03;
+    background-color: #1F9D00;
+    color: white;
+}
+#perfil2-h1:hover{
     border-color: #35ff03;
     background-color: #1F9D00;
     color: white;
