@@ -43,15 +43,16 @@ def verify_device(request):
         print(data)
         ip_device = data.get('ip')
         function_device = data.get('funcao')
-        
+        creating_device=True
         print(ip_device)
         if is_valid_ip(ip_device) and function_device == 'porta':
             device = Device.objects.get(type='Porta')
             new_device = Door(ip=ip_device, device=device)
             new_device.save()
             resposta = {'confirmation': True}
-
-            return JsonResponse(resposta)
+            meu_valor = True
+            request.session['meu_valor'] = meu_valor
+            return JsonResponse(resposta) 
         else:
             return JsonResponse({'confirmation': False})
 
@@ -108,8 +109,15 @@ def about_us(request):
     return render(request, 'about_us.html')
 
 def search_device(request):
-    
-    return render(request, 'search_device.html', {})
+    last_id = Door.objects.order_by('-id').first().id if Door.objects.exists() else 0
+    print(last_id)
+    device = get_object_or_404(Door, id=last_id)
+    if request.method == 'POST':
+        device.name = request.POST.get('Nome_device')
+        device.number_door = request.POST.get('Number_device')
+        device.save()
+        return redirect(index)
+    return render(request, 'search_device.html', {'porta':device})
 
    
 def cadastro(request):

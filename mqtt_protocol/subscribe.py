@@ -45,8 +45,8 @@ def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
         global data
         
-        data = msg.payload.decode() 
-        
+        payload = msg.payload.decode() 
+        data = json.loads(payload)
         print("Mensagem recebida:", data)
     
         client.disconnect()

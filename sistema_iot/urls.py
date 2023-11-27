@@ -1,9 +1,9 @@
 
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from door_device.views import *
-import include
+
 from django.conf import settings
 
 urlpatterns = [
@@ -21,5 +21,5 @@ urlpatterns = [
      
     path('confirm/',verify_device, name='verify_device'),
     
-    path('oauth/', include('social_django.urls',)),
+    path('', include('social_django.urls'), name='social'),
 ]

@@ -14,6 +14,7 @@ class SuapOAuth2(BaseOAuth2):
     
 
     def user_data(self, access_token, *args, **kwargs):
+       
         return self.request(
             url=self.USER_DATA_URL,
             data={'scope': kwargs['response']['scope']},

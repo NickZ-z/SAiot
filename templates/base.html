@@ -66,12 +66,12 @@
                     <a class="d-flex flex-row justify-content-center align-items-center" style="text-decoration: none;"
                         href="{% url 'logout' %}">
                         <h1 class=" m-0 mb-2" id="perfil-h1" onmouseover="changeText_auth()"
-                            onmouseout="restoreText_auth()">Bem-Vindo</h1>
+                            onmouseout="restoreText_auth()">Bem-Vindo, {{ user.get_full_name }}</h1>
                     </a>
                     {% else %}
 
                     <a class="d-flex flex-row justify-content-center align-items-center" style="text-decoration: none;"
-                        href="{% url 'social:begin' 'suap' %}">
+                        href="{% url 'login' %}">
                         <h1 class=" m-0 mb-2" id="perfil2-h1">Login via SUAP</h1>
                     </a>
                     {% endif %}

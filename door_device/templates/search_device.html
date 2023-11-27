@@ -47,28 +47,56 @@ SUAP - Sistema administrativo da Internet das Coisas
                                 </button>
                             </div>
                             <label style="display: none;" id="loading" for="">Procurando dispositivo...</label>
-                            <div id="founded_device">
+                            <form action="{% url 'search_d'%}" method="post" id="founded_device" style="display: none;">
                                 <h4>Dispositivo Encontrado</h4>
                                 <h5 class="d-flex flex-row "><Strong style="margin-right: 10px;">IP:</Strong>
-                                    <p style="color: rgb(47, 94, 0);">10.10.010.1</p>
+                                    <p style="color: rgb(47, 94, 0);">"LOCALHOST"</p>
                                 </h5>
                                 <h5> <Strong>Função do dispositivo:</Strong>
                                     <p style="color: red;">Porta</p>
                                 </h5>
-                                <div class="d-flex justify-content-start m-4">
+                                
+                                    {% csrf_token %}
+                                    <div class="d-flex justify-content-start m-4">
 
 
-                                    <input type="text" id="Nome_device" placeholder="Digite o Nome:">
+                                        <input type="text" id="Nome_device" name="Nome_device" placeholder="Digite o Nome:">
 
 
-                                    <input type="text" id="Nome_device" placeholder="Digite o Número da porta:">
+                                        <input type="text" id="Number_device" name="Number_device" placeholder="Digite o Número da porta:">
 
-                                </div>
-                                <div class="d-flex justify-content-around mt-3">
-                                    <button id="save_button">Salvar dispositivo</button>
-                                    <button id="cancel_button">Cancelar dispositivo</button>
-                                </div>
-                            </div>
+                                    </div>
+                                    <div class="d-flex justify-content-around mt-3">
+                                        <button type="submit" id="save_button">Salvar dispositivo</button>
+                                        <button type="submit" id="cancel_button">Cancelar dispositivo</button>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $('#botao-ajax').click(function() {
+                                                    // Valor de exemplo (substitua por um valor real)
+                                                    var nome = 'Exemplo';
+                                        
+                                                    // Envia uma solicitação AJAX para a view Django
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: '{% url "ajax_exemplo" %}',  // Substitua 'ajax_exemplo' pelo nome real da sua view
+                                                        data: {
+                                                            'nome': nome,
+                                                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+                                                        },
+                                                        success: function(response) {
+                                                            console.log(response.mensagem);
+                                                            // Faça algo com a resposta, se necessário
+                                                        },
+                                                        error: function(error) {
+                                                            console.error('Erro na solicitação AJAX:', error);
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                
+                            </form>
 
                             <div id="notfounded_device" style="display: none;">
                                 <h4 style="text-align: center;">Dispositivo <p style="color: red;">NÃO CONFIGURADO</p>
