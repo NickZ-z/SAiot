@@ -7,7 +7,7 @@ $(document).ready(function () {
             url: '/confirm/', // URL da sua view Django que processará a confirmação
             type: 'GET',       // Método HTTP, neste caso é um pedido GET
             success: function (data) {
-                console.log(data.confirmation)
+                console.log(funcao);
                 if (data.confirmation) {
                     $("#founded_device").show();
                     $("#loading").hide();

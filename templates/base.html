@@ -66,7 +66,7 @@
                     <a class="d-flex flex-row justify-content-center align-items-center" style="text-decoration: none;"
                         href="{% url 'logout' %}">
                         <h1 class=" m-0 mb-2" id="perfil-h1" onmouseover="changeText_auth()"
-                            onmouseout="restoreText_auth()">Bem-Vindo, {{ user.get_full_name }}</h1>
+                            onmouseout="restoreText_auth()">Bem-Vindo {{ user.name }}</h1>
                     </a>
                     {% else %}
 

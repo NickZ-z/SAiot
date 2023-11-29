@@ -37,24 +37,6 @@ def verify_data():
     if data != 'Conexão confirmada':
         
         return False
-def verify_device(request):
-        Subscriber.run()
-        data = Subscriber.get_dataMQTT()
-        print(data)
-        ip_device = data.get('ip')
-        function_device = data.get('funcao')
-        creating_device=True
-        print(ip_device)
-        if is_valid_ip(ip_device) and function_device == 'porta':
-            device = Device.objects.get(type='Porta')
-            new_device = Door(ip=ip_device, device=device)
-            new_device.save()
-            resposta = {'confirmation': True}
-            meu_valor = True
-            request.session['meu_valor'] = meu_valor
-            return JsonResponse(resposta) 
-        else:
-            return JsonResponse({'confirmation': False})
 
 def send_manssege(request, id):
     global fail
@@ -108,18 +90,27 @@ def login_index(request):
 def about_us(request):
     return render(request, 'about_us.html')
 
-def search_device(request):
-    last_id = Door.objects.order_by('-id').first().id if Door.objects.exists() else 0
-    print(last_id)
-    device = get_object_or_404(Door, id=last_id)
-    if request.method == 'POST':
-        device.name = request.POST.get('Nome_device')
-        device.number_door = request.POST.get('Number_device')
-        device.save()
-        return redirect(index)
-    return render(request, 'search_device.html', {'porta':device})
 
+
+def verify_device(request):
+        Subscriber.run()
+        data = Subscriber.get_dataMQTT()
+        print(data)
+        ip_device = '10.10.101.1'
+        function_device = 'Porta'
+        print(ip_device)
+        if is_valid_ip(ip_device) and function_device == 'Porta':
+           
+            context = {'funcao':function_device}
+           
+            return render(request,'search_device.html',context) and JsonResponse({'confirmation': True})
+        else:
+            return JsonResponse({'confirmation': False})
+
+def search_device(request):
    
+    return render(request, 'search_device.html')
+
 def cadastro(request):
     device_form = DeviceForm()
     door_form = DoorForm()

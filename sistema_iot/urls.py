@@ -9,8 +9,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index,name='index'),
-    path('teste/<int:id>/', send_manssege, name='msg'),
-    path('localizar_IoT/cadastro/', cadastro, name='cadastro'),
+    path('sending/<int:id>/', send_manssege, name='msg'),
+
     path('localizar_IoT/', search_device, name='search_d'),
     path('login/', login_index, name='login'),
     path('logout/', logout_index, name='logout'),
