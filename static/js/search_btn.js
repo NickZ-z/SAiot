@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#button_search").click(function () {
+    function myFunction() {
         $("#button_search").hide();
         $("#loading").show();
 
@@ -24,5 +24,10 @@ $(document).ready(function () {
                 // Se ocorrer um erro, você pode ocultar #loading aqui se necessário
             }
         });
+    }
+
+    // Vincula a função ao evento de clique do botão
+    $('#button_search').on('click', function () {
+        myFunction();
     });
 });

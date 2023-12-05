@@ -133,9 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
-SOCIAL_AUTH_URL_NAMESPACE = "users:social"
-SOCIAL_AUTH_REQUIRE_POST = True
+
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 try:

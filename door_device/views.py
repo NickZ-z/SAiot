@@ -33,11 +33,22 @@ def verify_data():
     
     Subscriber.run()
     data = Subscriber.get_dataMQTT()
-    
-    if data != 'Conexão confirmada':
-        
+    print(data)
+    if data != 'time_over':
+        if data != 'fail_json':
+            if 'token' not in data or 'ip' not in data or 'funcao' not in data:
+                print('json quebrado')
+                return False
+            else: 
+                print('json correto')
+                return True
+        else: 
+            print('não foi mandado um json')
+            return False
+    else: 
+        print('o tempo acabou na views')
         return False
-
+        
 def send_manssege(request, id):
     global fail
     device = get_object_or_404(Door, id=id)
@@ -56,10 +67,9 @@ def send_manssege(request, id):
     if verify_data() is False:
         device.status = verify_device
         device.save()
-        fail == True
-        return redirect(index)
-    fail == False
-    return redirect(index)
+        return JsonResponse({'sua_variavel': True}) and redirect(index)
+    
+    return JsonResponse({'sua_variavel': False})
 
 def index(request): 
     devices_on_door = Door.objects.all()
@@ -103,7 +113,7 @@ def verify_device(request):
            
             context = {'funcao':function_device}
            
-            return render(request,'search_device.html',context) and JsonResponse({'confirmation': True})
+            return None
         else:
             return JsonResponse({'confirmation': False})
 

@@ -40,22 +40,8 @@ SUAP - Sistema administrativo da Internet das Coisas
                             Além de retornar o TOKEN para confirmar o processo.</p>
                         <hr>
 
-                        <div >
-                            <form action="{% url 'search_d'%}" method="post" class="d-flex  flex-column align-items-center">
-                                {% csrf_token %}
-
-
-
-                                <div class=" ">
-
-
-                                    <input type="text" id="Nome_device" name="Nome_device" placeholder="Digite o Nome:">
-
-
-                                    <input type="text" id="Number_device" name="Number_device"
-                                        placeholder="Digite o Número da porta:">
-
-                                </div>
+                        <div class="d-flex justify-content-center">
+                            
 
 
 
@@ -65,12 +51,9 @@ SUAP - Sistema administrativo da Internet das Coisas
                                     </button>
                                 </div>
                                 <label style="display: none;" id="loading" for="">Procurando dispositivo...</label>
-                                <div style="display: none;">
+                                <div style="display: none;" id="#founded_device">
                                     <h4>Dispositivo Encontrado</h4>
-                                    <script>
-                                        var funcao = "{{ funcao }}"
-                                        console.log(funcao)
-                                    </script>
+                                    
                                     <h5 class="d-flex flex-row "><Strong style="margin-right: 10px;">IP:</Strong>
                                         <p style="color: rgb(47, 94, 0);">"LOCALHOST"</p>
                                     </h5>
@@ -89,7 +72,7 @@ SUAP - Sistema administrativo da Internet das Coisas
                                     </h4>
 
                                 </div>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>

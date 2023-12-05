@@ -46,9 +46,15 @@ def subscribe(client: mqtt_client):
         global data
         
         payload = msg.payload.decode() 
-        data = json.loads(payload)
-        print("Mensagem recebida:", data)
+        print("Mensagem recebida sem problemas:", data)
     
+        try:
+            data = json.loads(payload)
+            print("Mensagem recebida sem problemas:", data)
+    
+        except json.JSONDecodeError:
+            data = 'fail_json'
+            print('print no json')
         client.disconnect()
         
         
@@ -58,17 +64,16 @@ def subscribe(client: mqtt_client):
     
 
 class Subscriber():
-    def statusTimer(status):
-        if status == True:
-            return True
-        else:
-            return False
+    
     def get_dataMQTT():
         global data
         return data
     def timeout_event():
         global stop_search
+        global data
         print("Acabou o tempo")
+        data = 'time_over'
+        
         stop_search = True
     def run():
         client = connect_mqtt()
