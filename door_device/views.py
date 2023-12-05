@@ -12,11 +12,7 @@ fail = False
 
 def index(request): 
     devices_on_door = Door.objects.all()
-    
-    paginator = Paginator(devices_on_door, 3)
-    pagina = request.GET.get('page')
-    itens = paginator.get_page(pagina)
-    return render(request,'index.html',{ 'devices':itens, 'fail': fail})
+    return render(request, 'index.html', {'devices': devices_on_door, 'fail': fail})
 
 def is_valid_ip(ip_str):
     try:
@@ -71,12 +67,7 @@ def send_manssege(request, id):
     
     return JsonResponse({'sua_variavel': False})
 
-def index(request): 
-    devices_on_door = Door.objects.all()
-    paginator = Paginator(devices_on_door, 3)
-    pagina = request.GET.get('page')
-    itens = paginator.get_page(pagina)
-    return render(request,'index.html',{ 'devices':itens})
+
 
 
 def faqs(request):
