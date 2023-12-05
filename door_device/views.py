@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404,HttpResponse
 from django.http import JsonResponse
 from .models import *
-from .forms import DoorForm, DeviceForm
+from .forms import DoorForm, DeviceForm, DeviceFilterForm
 from django.core.paginator import Paginator
 from mqtt_protocol.publisher import *
 from mqtt_protocol.subscribe import *
@@ -12,7 +12,30 @@ fail = False
 
 def index(request): 
     devices_on_door = Door.objects.all()
-    return render(request, 'index.html', {'devices': devices_on_door, 'fail': fail})
+
+    port_filter = request.GET.get('port_filter', '')
+    status_filter = request.GET.get('status_filter', '')
+    ip_filter = request.GET.get('ip_filter', '')
+    room_filter = request.GET.get('room_filter', '')
+
+    if port_filter:
+        devices_on_door = devices_on_door.filter(number_door__icontains=port_filter)
+    if status_filter:
+        devices_on_door = devices_on_door.filter(status__icontains=status_filter)
+    if ip_filter:
+      
+        devices_on_door = devices_on_door.filter(id__icontains=int(ip_filter))
+    if room_filter:
+
+        devices_on_door = devices_on_door.filter(name__exact=room_filter)
+
+
+    context = {
+        'devices': devices_on_door,
+    }
+
+
+    return render(request, 'index.html', context)
 
 def is_valid_ip(ip_str):
     try:

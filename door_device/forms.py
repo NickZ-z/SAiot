@@ -18,3 +18,9 @@ class DeviceForm(forms.ModelForm):
         widgets = {
             'type': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+class DeviceFilterForm(forms.Form):
+    port_filter = forms.ChoiceField(choices=[('', 'Todos'), ('Aberto', 'Sim'), ('Fechado', 'Nenhuma')], required=False)
+    status_filter = forms.ChoiceField(choices=[('', 'Todos'), ('Aberto', 'Aberto'), ('Fechado', 'Fechado')], required=False)
+    ip_filter = forms.CharField(max_length=100, required=False)
+    room_filter = forms.CharField(max_length=100, required=False)
