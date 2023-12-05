@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Porta{% endblock %}
+
+{% block main %}
+<h2>Editar Porta {{ door.number_door }}</h2>
+<form method="post" action="{% url 'edit_door' door.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+</form>
+{% endblock %}

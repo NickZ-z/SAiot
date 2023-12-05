@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index,name='index'),
     path('sending/<int:id>/', send_manssege, name='msg'),
-
+    path('edit_door/<int:door_id>/', edit_door, name='edit_door'),
     path('localizar_IoT/', search_device, name='search_d'),
     path('login/', login_index, name='login'),
     path('logout/', logout_index, name='logout'),

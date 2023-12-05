@@ -145,3 +145,16 @@ def deletar_device(request, device_id):
 
     # Redirecionar para outra página após a exclusão
     return redirect(index)
+
+def edit_door(request, door_id):
+    door = get_object_or_404(Door, id=door_id)
+
+    if request.method == 'POST':
+        form = DoorForm(request.POST, instance=door)
+        if form.is_valid():
+            form.save()
+            return redirect('index') 
+    else:
+        form = DoorForm(instance=door)
+
+    return render(request, 'edit_door.html', {'form': form, 'door': door})

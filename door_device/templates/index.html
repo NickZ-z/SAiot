@@ -100,9 +100,10 @@ SUAP - Sistema administrativo da Internet das Coisas
                             {%endif%}
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <a href="{% url 'edit_door' device.id %}" class="btn btn-primary btn-sm btn-editar" type="button"
+                            data-toggle="tooltip" data-placement="top" title="Editar">
                             <i class="fa fa-table"></i> Editar
-                        </button>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-danger btn-sm btn-deletar" href="{% url 'deletar_device' device.id %}" >
