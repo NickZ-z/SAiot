@@ -57,6 +57,20 @@ footer {
     height: 35px;
     transition: background-color 0.3s;
 }
+.logout-btn {
+    background-color: #d9534f; /* Cor de fundo vermelha */
+    color: #fff; /* Cor do texto branco */
+    border: none; /* Sem borda */
+    
+    border-radius: 5px; /* Borda arredondada */
+    cursor: pointer; /* Cursor como ponteiro ao passar o mouse */
+    transition: background-color 0.3s ease; /* Transição suave de cor de fundo */
+  }
+
+  /* Efeito de hover para a transição de cor de fundo */
+  .logout-btn:hover {
+    background-color: #c9302c; /* Cor de fundo mais escura no hover */
+  }
 #perfil-h1{
     border-width: 1px;
     border-radius: 5px;
@@ -73,11 +87,7 @@ footer {
     height: 35px;
     transition: background-color 0.3s;
 }
-#perfil-h1:hover{
-    border-color: #35ff03;
-    background-color: #1F9D00;
-    color: white;
-}
+
 #perfil2-h1:hover{
     border-color: #35ff03;
     background-color: #1F9D00;

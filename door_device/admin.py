@@ -7,4 +7,4 @@ class DeviceAdmin(admin.ModelAdmin):
 
 @admin.register(Door)
 class DoorAdmin(admin.ModelAdmin):
-    list_display = ("name","ip","number_door","status","device",)
+    list_display = ("name","mac","number_door","status","device",)

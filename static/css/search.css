@@ -15,6 +15,9 @@
     transform: scale(1.1); 
     opacity: 30%;
 }
+#founded_device2{
+    display: none;
+}
 #save_button{
     
   padding: 10px 20px;
@@ -32,3 +35,20 @@
     background-color: #3498db;
     color: #ffffff;
 }
+#cancel_button{
+    
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid red;
+    color: red;
+    background-color: #ffffff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  #cancel_button:hover{
+      background-color: red;
+      color: #ffffff;
+  }

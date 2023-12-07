@@ -1,53 +1,37 @@
 from django.shortcuts import render, redirect,get_object_or_404,HttpResponse
 from django.http import JsonResponse
 from .models import *
-from .forms import DoorForm, DeviceForm
+from door_device.use_cases import * 
+from .forms import DoorForm
 from django.core.paginator import Paginator
 from mqtt_protocol.publisher import *
 from mqtt_protocol.subscribe import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-import ipaddress
-fail = False
+import netaddr
+import json 
 
 def index(request): 
     devices_on_door = Door.objects.all()
     
-    paginator = Paginator(devices_on_door, 3)
-    pagina = request.GET.get('page')
-    itens = paginator.get_page(pagina)
-    return render(request,'index.html',{ 'devices':itens, 'fail': fail})
-
-def is_valid_ip(ip_str):
-    try:
-        ipaddress.IPv4Address(ip_str)
-        return True
-    except ipaddress.AddressValueError:
-        try:
-            ipaddress.IPv6Address(ip_str)
-            return True
-        except ipaddress.AddressValueError:
-            return False
-        
-def verify_data():  
     
-    Subscriber.run()
-    data = Subscriber.get_dataMQTT()
-    print(data)
-    if data != 'time_over':
-        if data != 'fail_json':
-            if 'token' not in data or 'ip' not in data or 'funcao' not in data:
-                print('json quebrado')
-                return False
-            else: 
-                print('json correto')
-                return True
-        else: 
-            print('não foi mandado um json')
-            return False
-    else: 
-        print('o tempo acabou na views')
-        return False
+    return render(request,'index.html',{ 'devices':devices_on_door})
+
+def edit_door(request, door_id):
+    door = get_object_or_404(Door, id=door_id)
+    
+    if request.method == 'POST':
+        form = DoorForm(request.POST, instance=door)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('index') 
+        else:
+            print(form.errors)
+    else:
+        form = DoorForm(instance=door)
+    devices2 = Device.objects.all()
+    return render(request, 'edit_door.html', {'form': form, 'door': door, 'device':devices2})
         
 def send_manssege(request, id):
     global fail
@@ -73,10 +57,8 @@ def send_manssege(request, id):
 
 def index(request): 
     devices_on_door = Door.objects.all()
-    paginator = Paginator(devices_on_door, 3)
-    pagina = request.GET.get('page')
-    itens = paginator.get_page(pagina)
-    return render(request,'index.html',{ 'devices':itens})
+    
+    return render(request,'index.html',{ 'devices':devices_on_door})
 
 
 def faqs(request):
@@ -102,21 +84,6 @@ def about_us(request):
 
 
 
-def verify_device(request):
-        Subscriber.run()
-        data = Subscriber.get_dataMQTT()
-        print(data)
-        ip_device = '10.10.101.1'
-        function_device = 'Porta'
-        print(ip_device)
-        if is_valid_ip(ip_device) and function_device == 'Porta':
-           
-            context = {'funcao':function_device}
-           
-            return None
-        else:
-            return JsonResponse({'confirmation': False})
-
 def search_device(request):
    
     return render(request, 'search_device.html')
@@ -137,10 +104,10 @@ def cadastro(request):
     
     return render(request, 'add_device.html', {'device_form': device_form, 'door_form': door_form})
 def deletar_device(request, device_id):
-    # Obter a instância da porta ou retornar uma resposta 404 se não existir
+    
     device = get_object_or_404(Door, id=device_id)
 
-    # Deletar a instância da porta
+    
     device.delete()
 
     # Redirecionar para outra página após a exclusão

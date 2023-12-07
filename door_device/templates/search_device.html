@@ -40,39 +40,44 @@ SUAP - Sistema administrativo da Internet das Coisas
                             Além de retornar o TOKEN para confirmar o processo.</p>
                         <hr>
 
-                        <div class="d-flex justify-content-center">
-                            
+                        <div>
 
 
 
-                                <div class="m-5" id="founded_device">
-                                    <button  id="button_search">
-                                        Localizar um dispositivo
-                                    </button>
-                                </div>
-                                <label style="display: none;" id="loading" for="">Procurando dispositivo...</label>
-                                <div style="display: none;" id="#founded_device">
+
+                            <div class="m-5 d-flex justify-content-center">
+                                <button id="button_search">
+                                    Localizar um dispositivo
+                                </button>
+                            </div>
+                            <label style="display: none;" id="loading" for="">Procurando dispositivo...</label>
+                            <div class="d-flex justify-content-center ">
+                                <div style="display: none;" id="founded_device">
                                     <h4>Dispositivo Encontrado</h4>
-                                    
+
                                     <h5 class="d-flex flex-row "><Strong style="margin-right: 10px;">IP:</Strong>
                                         <p style="color: rgb(47, 94, 0);">"LOCALHOST"</p>
                                     </h5>
                                     <h5> <Strong>Função do dispositivo:</Strong>
                                         <p style="color: red;">Porta</p>
                                     </h5>
-                                    <div class="d-flex justify-content-around mt-3">
-                                        <button type="submit" id="save_button">Salvar dispositivo</button>
-                                        <button type="submit" id="cancel_button">Cancelar dispositivo</button>
-
-                                    </div>
-                                </div>
-                                <div id="notfounded_device" style="display: none;">
-                                    <h4 style="text-align: center;">Dispositivo <p style="color: red;">NÃO CONFIGURADO
-                                        </p>
-                                    </h4>
 
                                 </div>
-                            
+
+                            </div>
+                            <div id="founded_device2">
+                                <div class="d-flex justify-content-around">
+                                    <a type="submit" id="save_button">Salvar dispositivo</a>
+                                    <a type="submit" id="cancel_button">Cancelar dispositivo</a>
+                                </div>
+                            </div>
+                            <div id="notfounded_device" style="display: none;">
+                                <h4 style="text-align: center;">Dispositivo <p style="color: red;">NÃO CONFIGURADO
+                                    </p>
+                                </h4>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>

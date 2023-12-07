@@ -63,8 +63,8 @@ SUAP - Sistema administrativo da Internet das Coisas
                 
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <div class="ip"><b>IP:</b></div>
-                        <div class="ip-endereço"><b>{{ device.id }}</b></div>
+                        <div class="ip"><b>MAC:</b></div>
+                        <div class="ip-endereço"><b>{{ device.mac }}</b></div>
                     </div>
                     <div class="funcao-div">
                         <div class="d-flex justify-content-between">
@@ -94,15 +94,15 @@ SUAP - Sistema administrativo da Internet das Coisas
                             <i class="fa fa-edit"></i> Abrir Porta
                         </a>
                         {% elif device.status == 'aberta' %}
-                            <a data-item-id="{{ device.id }}" id="meu-botao" class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
+                            <a data-item-id="{{ device.id }}" id="meu-botao2" class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
                                 <i class="fa fa-trash"></i> Fechar Porta
                             </a>
                             {%endif%}
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-primary btn-sm btn-editar" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <a class="btn btn-primary btn-sm btn-editar" href="{% url 'edit_door' device.id %}" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
                             <i class="fa fa-table"></i> Editar
-                        </button>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-danger btn-sm btn-deletar" href="{% url 'deletar_device' device.id %}" >

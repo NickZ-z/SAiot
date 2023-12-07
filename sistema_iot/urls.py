@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from door_device.views import *
-
+from door_device.use_cases import *
 from django.conf import settings
 
 urlpatterns = [
@@ -19,7 +19,9 @@ urlpatterns = [
     path('localizar_IoT/localizar/', faqs, name='localizando'),
     path('deletar/<int:device_id>/', deletar_device, name='deletar_device'),
      
-    path('confirm/',verify_device, name='verify_device'),
+    path('confirm/',create_device, name='verify_device'),
     
+    path('edit_door/<int:door_id>/', edit_door, name='edit_door'),
+
     path('', include('social_django.urls'), name='social'),
 ]

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     function myFunction() {
         $("#button_search").hide();
         $("#loading").show();
@@ -7,10 +8,12 @@ $(document).ready(function () {
             url: '/confirm/', // URL da sua view Django que processará a confirmação
             type: 'GET',       // Método HTTP, neste caso é um pedido GET
             success: function (data) {
-                console.log(funcao);
+                console.log(data.confirmation);
                 if (data.confirmation) {
-                    $("#founded_device").show();
+                    
                     $("#loading").hide();
+                    $("#founded_device").show();
+                    $("#founded_device2").show();
                 } else {
                     // Lógica para o caso em que a confirmação não foi recebida
                     $("#loading").hide();

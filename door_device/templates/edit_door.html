@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Porta{% endblock %}
+{% block link %}
+<style>
+     form {
+      max-width: 600px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 20px;
+      
+    }
+    #div1 {
+      max-width: 600px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 20px;
+      
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+
+      font-family: 'Arial', sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2ecc71; /* Cor verde para o texto */
+       /* Cor de fundo */
+       /* Espaçamento interno */
+      border-radius: 8px; /* Borda arredondada */
+      display: inline-block;
+     
+    
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+    .div-title{
+        font-family: 'Helvetica', sans-serif;
+        text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #2ecc71; /* Cor azul para o texto */
+      border-bottom: 2px solid #2ecc71; /* Linha horizontal azul abaixo do texto */
+      padding-bottom: 5px; /* Espaçamento abaixo da linha */
+      margin-top: 20px; /* Espaçamento superior */
+    }
+</style>
+
+
+{% endblock %}
+{% block main %}
+<div class="container">
+    <h2 style="text-align:initial;" class="mt-4"><p>Editando {{door.device}}</p> {{ door.name }} {{ door.number_door }}</h2>
+  
+    <div class="row">
+      <!-- Div -->
+      <div class="col custom-div shadow p-3 mr-5 bg-white rounded m-1" >
+        <h2 class="div-title">Configurações anteriores</h2>
+        <div id="div1">
+            <label for="name">Nome:</label>
+          <p>{{door.name}}</p>
+      
+          <label for="mac" class="style-label">Endereço MAC:</label>
+          <p>{{door.mac}}</p>
+      
+          <label for="number_door">Número da Porta:</label>
+          <p>{{door.number_door}}</p>
+      
+          <label for="status">Status:</label>
+          <p>{{door.status}}</p>
+          <label for="device">Dispositivo:</label>
+           <p>{{door.device}}</p>
+        </div>
+      </div>
+  
+      <!-- Formulário -->
+      <div class="col shadow p-3 ml-5 bg-white rounded m-1">
+        <form method="post" action="{% url 'edit_door' door.id %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
