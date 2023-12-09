@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'door_device',
+    'faqs',
+    
 ]
 
 MIDDLEWARE = [

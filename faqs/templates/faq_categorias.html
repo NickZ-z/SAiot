@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SUAP - Sistema administrativo da Internet das Coisas
+{% endblock %}
+
+{% block link %}
+
+
+
+{% endblock %}
+
+{% block main %}
+
+
+
+
+{% if user.is_authenticated %}
+<div class="container">
+    <h2>Categorias</h2>
+    <ul>
+        {% for categoria in categorias %}
+        <li><a href="{% url 'faq_list' categoria_id=categoria.id %}">{{ categoria.nome }}</a></li>
+        {% endfor %}
+    </ul>
+    <h2>Criar Nova Categoria</h2>
+    <form method="post" action="{% url 'criar_categoria' %}">
+        {% csrf_token %}
+        <label for="nome_categoria">Nome da Categoria:</label>
+        <input type="text" name="nome_categoria" required>
+        <button type="submit">Criar Categoria</button>
+    </form>
+</div>
+{% else %}
+<div class="d-flex justify-content-center align-items-center" style="height: 290px;">
+    <p>
+        <strong>Para acessar o sistema, é necessário estar logado em um perfil de servidor.</strong>
+    </p>
+</div>
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</script>
+<script src="{% static 'js/error_device.js' %}"></script>
+{% endblock %}
