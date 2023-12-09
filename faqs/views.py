@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import FAQ, FAQCategoria
-from .forms import FAQForm
+from .forms import FAQForm, CategoriaForm
+
 
 @login_required
 def faq_categorias(request):
-        categorias = FAQCategoria.objects.all()
-        return render(request, 'faq_categorias.html', {'categorias': categorias})
+    categorias = FAQCategoria.objects.all()
+    form = CategoriaForm()  # Adicione esta linha para criar uma instância do formulário
+    return render(request, 'faq_categorias.html', {'categorias': categorias, 'form': form})
 
 @login_required
 def faq_list(request, categoria_id):
@@ -47,4 +49,5 @@ def criar_categoria(request):
         form = CategoriaForm(request.POST)
         if form.is_valid():
             form.save()
-    return redirect('faq_categorias')
+            return redirect('faq_categorias')  # Certifique-se de redirecionar para a view correta
+        
