@@ -13,3 +13,5 @@ class Door(models.Model):
 
     def __str__(self) -> str:
           return f"Nome: {self.name}, mac: {self.mac}, Número: {self.number_door}, Status: {self.status}, Device: {self.device}"
+class Token(models.Model):
+    token = models.CharField(max_length=255)

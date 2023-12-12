@@ -8,15 +8,51 @@ from mqtt_protocol.publisher import *
 from mqtt_protocol.subscribe import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-import netaddr
-import json 
-
+from django.contrib.auth.decorators import login_required
 def index(request): 
     devices_on_door = Door.objects.all()
     
-    
-    return render(request,'index.html',{ 'devices':devices_on_door})
+    port_filter = request.GET.get('port_filter', '')
+    status_filter = request.GET.get('status_filter', '')
+    ip_filter = request.GET.get('ip_filter', '')
+    room_filter = request.GET.get('room_filter', '')
+    print(ip_filter)
+    if port_filter:
+        devices_on_door = devices_on_door.filter(number_door__icontains=port_filter)
+    if status_filter:
+        devices_on_door = devices_on_door.filter(status__icontains=status_filter)
+    if ip_filter:
+      
+        devices_on_door = devices_on_door.filter(mac__icontains=str(ip_filter))
+    if room_filter:
 
+        devices_on_door = devices_on_door.filter(name__exact=room_filter)
+
+    return render(request,'index.html',{ 'devices':devices_on_door})
+def create_device_delete(request):
+    
+    device = Door.objects.last()
+
+    
+    device.delete()
+
+    
+    return redirect(index)
+def create_device_edit(request): 
+    door = Door.objects.last()
+    
+    if request.method == 'POST':
+        form = DoorForm(request.POST, instance=door)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('index') 
+        else:
+            print(form.errors)
+    else:
+        form = DoorForm(instance=door)
+    devices2 = Device.objects.all()
+    return render(request, 'edit_door.html', { 'form': form,'door': door, 'device':devices2})
 def edit_door(request, door_id):
     door = get_object_or_404(Door, id=door_id)
     
@@ -34,10 +70,10 @@ def edit_door(request, door_id):
     return render(request, 'edit_door.html', {'form': form, 'door': door, 'device':devices2})
         
 def send_manssege(request, id):
-    global fail
+   
     device = get_object_or_404(Door, id=id)
     
-    verify_device = device.status
+    previous_status = device.status
     if device.status == 'aberta':
         device.status = 'fechada'
         device.save()
@@ -47,18 +83,18 @@ def send_manssege(request, id):
         device.status = 'aberta'
         device.save()
     Publisher.run(device.status)
-    
-    if verify_data() is False:
-        device.status = verify_device
+    vd = verify_data(previous_status,device.mac)
+    print(vd)
+    if vd is True:
+        
+        return JsonResponse({'sua_variavel': True}) 
+    else:
+        device.status = previous_status
         device.save()
-        return JsonResponse({'sua_variavel': True}) and redirect(index)
-    
-    return JsonResponse({'sua_variavel': False})
+        print(vd)
+        return JsonResponse({'sua_variavel': vd})
 
-def index(request): 
-    devices_on_door = Door.objects.all()
-    
-    return render(request,'index.html',{ 'devices':devices_on_door})
+
 
 
 def faqs(request):
@@ -82,7 +118,10 @@ def login_index(request):
 def about_us(request):
     return render(request, 'about_us.html')
 
-
+def no_user2(request):
+    if request.user.is_authenticated:
+        return redirect('index') 
+    return render(request,'no_user.html')
 
 def search_device(request):
    

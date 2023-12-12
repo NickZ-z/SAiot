@@ -4,16 +4,25 @@
     text-decoration: none;
     background-color: #1F9D00;
     border-radius: 7px;
-    border-width: 2px;
-    border-style:solid;
+    border-style: none;
+    box-shadow: 2px 2px 2.5px rgb(46, 46, 46);
     color: aliceblue;
-    border-color: black;
+
     transition: transform 0.3s ease;
 
 }
+.escondido {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.visivel {
+    display: block;
+    opacity: 1;
+}
 #button_search:hover{
     transform: scale(1.1); 
-    opacity: 30%;
+    opacity: 100%;
 }
 #founded_device2{
     display: none;

@@ -1,9 +1,10 @@
 $(document).ready(function () {
-    
+    var button_div = document.getElementById('button_search');
     function myFunction() {
-        $("#button_search").hide();
+        button_div.classList.remove('escondido');
+        button_div.classList.add('visivel');
         $("#loading").show();
-
+        
         $.ajax({
             url: '/confirm/', // URL da sua view Django que processará a confirmação
             type: 'GET',       // Método HTTP, neste caso é um pedido GET

@@ -9,45 +9,58 @@ from mqtt_protocol.subscribe import *
 def is_valid_mac(mac_str):
     try:
         mac = netaddr.EUI(mac_str)
-        # Apenas verifica se o MAC é válido, sem verificar se está em uso.
+        
         return True
     except (netaddr.AddrFormatError, ValueError):
         return False
         
-def verify_data():  
+def verify_data(previous_status,mac_models):  
     
     Subscriber.run()
     data = Subscriber.get_dataMQTT()
-    print(data)
+
+   
     if data != 'time_over':
         if data != 'fail_json':
-            if 'token' not in data or 'ip' not in data or 'funcao' not in data or 'status' not in data:
+            if 'token' not in data or 'mac' not in data or 'funcao' not in data or 'status' not in data:
                 print('json quebrado')
-                return False
+                return 'JSON_invalid'
+            else: 
+                status = data.get('status')
+                mac = data.get('mac')
+                if status == previous_status or (status != 'aberta' and status != 'fechada'):
+                    return 'conflited_json'
+                else:
+                    if mac != mac_models:
+                        return 'conflited_mac'
+                    else:
+                        return True
+                
+        else: 
+            print('não foi mandado um json')
+            return 'Broken_msg'
+    else: 
+        print('o tempo acabou na views')
+        return 'time_over'
+
+
+
+
+def verify_json(data):
+    if data != 'time_over':
+        if data != 'fail_json':
+            if 'token' not in data or 'mac' not in data or 'funcao' not in data or 'status' not in data:
+                print('json quebrado')
+                return 'JSON_invalid'
             else: 
                 print('json correto')
                 return True
         else: 
             print('não foi mandado um json')
-            return False
+            return 'Broken_msg'
     else: 
         print('o tempo acabou na views')
-        return False
-def verify_json(data2):
-    if data2 != 'time_over':
-        if data2 != 'fail_json':
-            if 'token' not in data2 or 'ip' not in data2 or 'funcao' not in data2 or 'status' not in data2:
-                print('json quebrado')
-                return False
-            else: 
-                print('json correto')
-                return True
-        else: 
-            print('não foi mandado um json')
-            return False
-    else: 
-        print('o tempo acabou na views')
-        return False
+        return 'time_over'
     
 def create_device(request):
         
@@ -56,8 +69,8 @@ def create_device(request):
         
 
         
-        if verify_json(data) is True:
-            mac = str(data.get('ip'))
+        if verify_json(data) == True:
+            mac = str(data.get('mac'))
             function_device = str(data.get('funcao'))
             status = str(data.get('status'))
             print(mac, function_device)
@@ -70,5 +83,5 @@ def create_device(request):
             else:
                 return JsonResponse({'confirmation': False})
         else:
-            print('teste')
+            
             return JsonResponse({'confirmation': False})

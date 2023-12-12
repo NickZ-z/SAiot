@@ -15,45 +15,45 @@ SUAP - Sistema administrativo da Internet das Coisas
 
 {% if user.is_authenticated %}
 
-<div class="container mt-5 d-flex align-items-center">
-    <form id="filter-form">
+<div class="container mt-5 d-flex align-items-center ">
+    <form id="filter-form" method="get">
         <div class="row ps-auto">
             <div class="col-md-auto mb-2">
-                <label for="port-filter">Apenas Portas:</label>
-                <select id="port-filter" name="port_filter" class="form-select">
-                    <option value="">Todos</option>
-                    <option value="Aberto">Sim</option>
-                    <option value="Fechado">nenhuma</option>
-                </select>
-            </div>
-            <div class="col-md-auto mb-2">
                 <label for="status-filter">Status:</label>
-                <select id="status-filter" name="status_filter" class="form-select">
-                    <option value="">Todos</option>
-                    <option value="Aberto">Aberto</option>
-                    <option value="Fechado">fechado</option>
+                <select id="status_filter" name="status_filter" class="form-control">
+                    <option value="">Selecione uma opção</option>
+                    <option value="aberta">Aberta</option>
+                    <option value="fechada">Fechada</option>
                 </select>
             </div>
             <div class="col-md-auto mb-2">
-                <label for="ip-filter">Buscar por IP:</label>
+                <label for="port-filter">Função:</label>
+                <input type="text" id="room-filter" name="room_filter" class="form-control">
+                </select>
+            </div>
+            <div class="col-md-auto mb-2">
+                <label for="ip-filter">Buscar por endereço MAC:</label>
                 <input type="text" id="ip-filter" name="ip_filter" class="form-control">
             </div>
             <div class="col-md-auto mb-2">
-                <label for="room-filter">Número da Sala:</label>
+                <label for="room-filter">Nome da Sala:</label>
                 <input type="text" id="room-filter" name="room_filter" class="form-control">
             </div>
             <div class="col-md-auto d-flex align-items-center justify-content-center pt-2 ">
-                <button id="btn-filter" type="submit" class="btn btn-primary  d-flex align-items-center justify-content-center mt-2 ">Filtrar</button>
+                <button id="btn-filter" type="submit"
+                    class="btn btn-primary  d-flex align-items-center justify-content-center mt-2 ">Filtrar</button>
             </div>
-            <div style="width: 230px;" class="ms-3 col-md-8 d-flex align-items-center justify-content-end">
-                <a id="btn-add" href="{% url 'search_d'%}" type="submit" class="btn btn-primary d-flex align-items-center justify-content-center w-100 mt-3 "> <Strong>+ Adicionar Dispositivo</Strong></a>
+            <div  class=" w-auto col-md-8 d-flex align-items-center justify-content-end">
+                <a id="btn-add" href="{% url 'search_d'%}" type="submit"
+                    class="btn btn-primary d-flex align-items-center justify-content-center w-100 mt-3 "> <Strong>+
+                        Adicionar Dispositivo</Strong></a>
             </div>
         </div>
     </form>
 </div>
 
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+<div class="container ">
+    <div  class="row owl-carousel owl-theme mt-5">
         {% for device in devices %}
         <form class="col">
             <div class="card-header cabeçalho w-auto">
@@ -81,8 +81,13 @@ SUAP - Sistema administrativo da Internet das Coisas
                             <div class="porta"><p style="color: rgb(255, 0, 0);" >Fechada</p></div>
                             {%endif%}
                         </div>
-                        <div id="divItem{{device.id}}" style="background-color: red; color: white; border-radius: 2px; display: none;">
-                            Error
+                        <div id="divItem{{device.id}}" style="background-color: red; color: white; border-radius: 5px;" class="escondido">
+                            Error: <p id="conflited_json_div_{{device.id}}" class="escondido">conflited_json</p>
+                            <p id="JSON_invalid_div_{{device.id}}" class="escondido">JSON_invalid</p>
+                            <p id="Broken_msg_div_{{device.id}}" class="escondido">Broken_msg</p>
+                            <p id="time_over_div_{{device.id}}" class="escondido">time_over</p>
+                            <p id="conflited_mac_div_{{device.id}}" class="escondido">conflited_mac</p>
+                            <a href="">Acesse essa página para suporte.</a>
                         </div>
                         
                     </div>
@@ -108,9 +113,7 @@ SUAP - Sistema administrativo da Internet das Coisas
                         <a class="btn btn-danger btn-sm btn-deletar" href="{% url 'deletar_device' device.id %}" >
                             <i class="fa fa-trash"></i> Deletar
                         </a>
-                    {% if fail == True %}
-                    <p for="">Não foi recebido a mensagem de confirmação</p>
-                    {% endif %}
+                    
                     </li>
                 </ul>
             </div>
@@ -121,23 +124,7 @@ SUAP - Sistema administrativo da Internet das Coisas
     </div>
 </div>
 
-<div id="pagination" class="d-flex justify-content-center">
-    <span id="span-pag" class="step-links d-flex justify-content-between " {% if devices.number != 1 and devices.number != devices.paginator.num_pages %} style="width: 500px;"{%else%} style="width: 250px;" {%endif%}>
-        {% if devices.has_previous %}
-            <a style="text-decoration: none;" class="d-flex mb-3 " href="?page=1"><p class=" p-1 ">&laquo; Primeiro</p></a>
-            <a style="text-decoration: none;" class="d-flex mb-3 " href="?page={{ devices.previous_page_number }}"><p class=" p-1 ">Anterior</p></a>
-        {% endif %}
 
-        {% if devices.paginator.count >= 4 %}
-        <span class="h-50 m-1">{{ devices.number }} de {{ devices.paginator.num_pages }}</span>
-        {% endif %}
-
-        {% if devices.has_next %}
-            <a style="text-decoration: none;" class="d-flex mb-3 " href="?page={{ devices.next_page_number }}"><p class=" p-1 ">Próximo</p></a>
-            <a style="text-decoration: none;" class="d-flex mb-3 "href="?page={{ devices.paginator.num_pages }}"><p class=" p-1">Último &raquo;</p></a>
-        {% endif %}
-    </span>
-</div>
 {% else %}
 <div class="d-flex justify-content-center align-items-center" style="height: 290px;">
     <p>
