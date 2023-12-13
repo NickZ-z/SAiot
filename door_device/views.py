@@ -29,6 +29,7 @@ def index(request):
         devices_on_door = devices_on_door.filter(name__exact=room_filter)
 
     return render(request,'index.html',{ 'devices':devices_on_door})
+@login_required
 def create_device_delete(request):
     
     device = Door.objects.last()
@@ -38,6 +39,7 @@ def create_device_delete(request):
 
     
     return redirect(index)
+@login_required
 def create_device_edit(request): 
     door = Door.objects.last()
     
@@ -53,6 +55,8 @@ def create_device_edit(request):
         form = DoorForm(instance=door)
     devices2 = Device.objects.all()
     return render(request, 'edit_door.html', { 'form': form,'door': door, 'device':devices2})
+
+@login_required
 def edit_door(request, door_id):
     door = get_object_or_404(Door, id=door_id)
     
@@ -68,7 +72,9 @@ def edit_door(request, door_id):
         form = DoorForm(instance=door)
     devices2 = Device.objects.all()
     return render(request, 'edit_door.html', {'form': form, 'door': door, 'device':devices2})
-        
+
+
+@login_required
 def send_manssege(request, id):
    
     device = get_object_or_404(Door, id=id)
@@ -76,17 +82,23 @@ def send_manssege(request, id):
     previous_status = device.status
     if device.status == 'aberta':
         device.status = 'fechada'
-        device.save()
+        
 
         
     elif device.status == 'fechada':
         device.status = 'aberta'
-        device.save()
-    Publisher.run(device.status)
+    dados = {
+        'mac':device.mac,
+        'status': device.status
+
+
+    }
+    dados_em_json = json.dumps(dados)
+    Publisher.run(dados_em_json)
     vd = verify_data(previous_status,device.mac)
     print(vd)
     if vd is True:
-        
+        device.save()
         return JsonResponse({'sua_variavel': True}) 
     else:
         device.status = previous_status
@@ -96,14 +108,14 @@ def send_manssege(request, id):
 
 
 
-
+@login_required
 def faqs(request):
     return render(request, 'FAQ.html')
-
+@login_required
 def logout_index(request):
     logout(request)
     return redirect('index')
-
+@login_required
 def login_index(request):
    
     if request.method == 'POST':
@@ -114,7 +126,7 @@ def login_index(request):
             login(request, user)
             return redirect('index')
     return render(request,'login.html')
-
+@login_required
 def about_us(request):
     return render(request, 'about_us.html')
 
@@ -122,26 +134,12 @@ def no_user2(request):
     if request.user.is_authenticated:
         return redirect('index') 
     return render(request,'no_user.html')
-
+@login_required
 def search_device(request):
    
     return render(request, 'search_device.html')
 
-def cadastro(request):
-    device_form = DeviceForm()
-    door_form = DoorForm()
-
-    if request.method == 'POST':
-        if 'cadastrar_device' in request.POST:
-            device_form = DeviceForm(request.POST)
-            if device_form.is_valid():
-                device_form.save()
-        elif 'cadastrar_door' in request.POST:
-            door_form = DoorForm(request.POST)
-            if door_form.is_valid():
-                door_form.save()
-    
-    return render(request, 'add_device.html', {'device_form': device_form, 'door_form': door_form})
+@login_required
 def deletar_device(request, device_id):
     
     device = get_object_or_404(Door, id=device_id)

@@ -8,7 +8,7 @@ footer {
 body {
     font-family: 'Montserrat', sans-serif;
 }
-.nav a{
+ a{
     font-size: 16px;
 }
 
@@ -72,7 +72,11 @@ body {
 
   /* Efeito de hover para a transição de cor de fundo */
   .logout-btn:hover {
-    background-color: #c9302c; /* Cor de fundo mais escura no hover */
+    background-color: #c9302c;
+    color: white; /* Cor de fundo mais escura no hover */
+  }
+  i:hover{
+    color: white;
   }
 #perfil-h1{
     border-width: 1px;

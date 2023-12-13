@@ -7,7 +7,20 @@ SUAP - Sistema administrativo da Internet das Coisas
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/logout_index.css' %}">
-
+<style>
+    .profile-picture {
+        width: 150px;
+        /* Ajuste conforme necessário */
+        height: 150px;
+        /* Ajuste conforme necessário */
+        border-radius: 50%;
+        /* Isso cria a borda circular */
+        object-fit: cover;
+        /* Isso mantém a proporção da imagem */
+        border: 2px solid #ffffff;
+        /* Cor da borda da imagem */
+    }
+</style>
 {% endblock %}
 
 {% block main %}
@@ -17,20 +30,28 @@ SUAP - Sistema administrativo da Internet das Coisas
     <h1 class="fw-bold">Sobre Nós</h1>
     <div class="row">
         <div class="col-md-6">
-            <div class="card mb-4">
-                <img src="imagem-sobre-nos-1.jpg" class="card-img-top" alt="Imagem 1">
+            <div class="card mb-4 text">
+                <div class="d-flex justify-content-center mt-4">
+                    <img src="{% static 'imgs/foto-nick.jpg' %}" class="card-img-top profile-picture" alt="Imagem 1">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">Nicholas Oliveira</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="card-text">
+    
+                        
+                        Meu nome é Nicholas Felipe Maia Oliveira é sou um estudante dedicado e entusiasta na área de programação. Atualmente estudante técnico da instituição Federal do Rio Grande do Norte (IFRN), eu demonstro paixão pela tecnologia e 
+                        está comprometido em aprimorar suas habilidades no desenvolvimento de software</p>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card mb-4">
-                <img src="imagem-sobre-nos-2.jpg" class="card-img-top" alt="Imagem 2">
+                <div class="d-flex justify-content-center mt-4">
+                    <img src="{% static 'imgs/hugo-jose.jpg' %}" class="card-img-top profile-picture" alt="Imagem 2">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">Hugo José</h5>
-                    <p class="card-text">Nullam scelerisque, metus eget iaculis viverra.</p>
+                    <p class="card-text">Eu sou Hugo José de Lima Nunes, um jovem de 19 anos que, até recentemente, estava em busca do meu caminho. Agora, descobri minha paixão pela Tecnologia da Informação (TI) e estou determinado a me tornar um profissional altamente capacitado nessa área. Com uma mentalidade de aprendizado constante, estou ansioso para enfrentar os desafios da TI, construir uma carreira sólida e contribuir significativamente para esse setor dinâmico.</p>
                 </div>
             </div>
         </div>

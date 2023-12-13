@@ -15,10 +15,10 @@ urlpatterns = [
     path('localizar_IoT/editando/', create_device_edit, name='create_d'),
     path('logout/', logout_index, name='logout'),
     path('sobre_nós/', about_us, name='about_us'),
-    path('FAQs/', faqs, name='faqs'),
+   
     path('localizar_IoT/delete/', create_device_delete, name='delete_d'),
     path('deletar/<int:device_id>/', deletar_device, name='deletar_device'),
-
+    path('ajuda/', faqs, name='faqs'),
     path('', no_user2, name='no_user'),
 
     path('confirm/',create_device, name='verify_device'),

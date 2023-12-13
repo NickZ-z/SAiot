@@ -8,6 +8,7 @@ SUAP - Sistema administrativo da Internet das Coisas
 {% block link %}
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="{% static 'js/search_btn.js' %}"></script>
+<script src="{% static 'js/retry_search_btn.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/search.css' %}">
 {% endblock %}
 
@@ -22,7 +23,7 @@ SUAP - Sistema administrativo da Internet das Coisas
                     <li><strong class="text-danger">BROKER</strong> = 'www.maqiatto.com'</li>
                     <li><strong class="text-danger">PORT</strong> = 1883</li>
                     <li><strong class="text-danger">TOPIC</strong> = "nicholas.o@escolar.ifrn.edu.br/T1"</li>
-                    <li><strong class="text-danger">TOKEN</strong> = "Conexão confirmada"</li>
+                    <li><a href=" {% url 'faqs'%}">Acesse aqui para ter contato com algumas <strong>Instruções</strong>.</a></li>
                 </ul>
             </div>
         </div>
@@ -55,7 +56,7 @@ SUAP - Sistema administrativo da Internet das Coisas
                                 <div class="mb-4" style="display: none;" id="founded_device">
                                     <h4 class="fw-bold" style="color: green;">Dispositivo Adicionado</h4>
 
-                                    
+
 
                                 </div>
 
@@ -63,16 +64,51 @@ SUAP - Sistema administrativo da Internet das Coisas
                             <div id="founded_device2">
                                 <div class="d-flex justify-content-around">
                                     <a type="submit" id="save_button" href="{% url 'create_d'%}">Editar dispositivo</a>
-                                    <a type="submit" id="cancel_button" href="{% url 'delete_d'%}">Deletar dispositivo</a>
+                                    <a type="submit" id="cancel_button" href="{% url 'delete_d'%}">Deletar
+                                        dispositivo</a>
                                 </div>
                             </div>
-                            <div id="notfounded_device" style="display: none;">
-                                <h4 style="text-align: center;">Dispositivo <p style="color: red;">NÃO CONFIGURADO
-                                    </p>
-                                </h4>
-
+                            <div>
+                                <div id="conflited_mac" style="display: none;" class="text-center">
+                                    <h4 style="text-align: center;">Dispositivo <p style="color: red;">NÃO CONFIGURADO
+                                            (conflited_mac)
+                                        </p>
+                                    </h4>
+                                    <button id="button_search2">
+                                        Tentar novamente
+                                    </button>
+                                </div>
+                                <div id="JSON_invalid" style="display: none;">
+                                    <h4 style="text-align: center;">
+                                        <p style="color: red;"> A mensagem está imcompleta (JSON_invalid)
+                                        </p>
+                                    </h4>
+                                    <div>
+                                        <button id="button_search2">
+                                            Tentar novamente
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="time_over" style="display: none;">
+                                    <h4 style="text-align: center;">
+                                        <p style="color: red;"> O TEMPO ACABOU (time_over)
+                                        </p>
+                                    </h4>
+                                    <button id="button_search2">
+                                        Tentar novamente
+                                    </button>
+                                </div>
+                                <div id="Broken_msg" style="display: none;" class="text-center">
+                                    <h4 style="text-align: center;">
+                                        <p style="color: red;">A mensagem recebida não é um JSON (Broken_msg)
+                                        </p>
+                                        <button id="button_search2">
+                                            Tentar novamente
+                                        </button>
+                                    </h4>
+                                </div>
                             </div>
-
+                           
                         </div>
                     </div>
                 </div>

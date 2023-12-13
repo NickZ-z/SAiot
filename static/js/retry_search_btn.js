@@ -1,7 +1,11 @@
 $(document).ready(function () {
     
     function myFunction() {
-        $("#button_search").hide();
+        $("#button_search2").hide();
+        $("#conflited_mac").hide();
+        $("#JSON_invalid").hide();
+        $("#time_over").hide();
+        $("#Broken_msg").hide();
         $("#loading").show();
        
         $.ajax({
@@ -19,7 +23,6 @@ $(document).ready(function () {
                     // Lógica para o caso em que a confirmação não foi recebida
                     $("#loading").hide();
                     $("#"+data_views).show();
-
                     $("#button_search2").show();
                     // Se desejar, você pode ocultar #loading aqui também
                 }
@@ -33,7 +36,7 @@ $(document).ready(function () {
     }
 
     // Vincula a função ao evento de clique do botão
-    $('#button_search').on('click', function () {
+    $('#button_search2').on('click', function () {
         myFunction();
     });
 });

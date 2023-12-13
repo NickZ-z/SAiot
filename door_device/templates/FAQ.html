@@ -6,67 +6,108 @@ SUAP - Sistema administrativo da Internet das Coisas
 {% endblock %}
 
 {% block link %}
-<link rel="stylesheet" href="{% static 'css/logout_index.css' %}">
+
+
 
 {% endblock %}
 
 {% block main %}
 
 
-<div class="container mt-4">
-    <h1 class="text-center">Perguntas Frequentes</h1>
 
-    <!-- Pergunta 1 -->
-    <div class="card mb-3">
-        <div class="card-header">
-            <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#pergunta1">
-                    Como eu faço algo?
-                </button>
-            </h5>
-        </div>
-        <div id="pergunta1" class="collapse show">
-            <div class="card-body">
-                Resposta para a pergunta.
-            </div>
-        </div>
-    </div>
 
-    <!-- Pergunta 2 -->
-    <div class="card mb-3">
-        <div class="card-header">
-            <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#pergunta2">
-                    Como eu faço algo?
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="container mt-5 mb-3">
+        <h2 class="text-center mb-4">Perguntas frequentes</h2>
+    
+        <div class="accordion" id="faqAccordion">
+          <!-- Pergunta 1 -->
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Quais são as instruções para adicionar um dispositivo? 
                 </button>
-            </h5>
-        </div>
-        <div id="pergunta2" class="collapse">
-            <div class="card-body">
-                Resposta para a pergunta.
+              </h2>
             </div>
-        </div>
-    </div>
+    
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqAccordion">
+              <div class="card-body">
+                Para a adição de um dispositivo no sistema é necessário, quando o sistema web estiver conectado ao broker <strong style="color: red;"> 'www.maqiatto.com'</strong>,
+                o dispositivo deve enviar um JSON padronizado para realizar o registro no BANCO DE DADOS.
+                <p>
 
-    <!-- Pergunta 3 -->
-    <div class="card mb-3">
-        <div class="card-header">
-            <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#pergunta3" >
-                    Como eu faço algo?
-                </button>
-            </h5>
-        </div>
-        <div id="pergunta3" class="collapse">
-            <div class="card-body">
-                Resposta para a pergunta.
+                Exemplo do padrão JSON:
+                  <p style="color: green;">{<strong>
+                
+                  "funcao" : "Porta",
+                  "mac":"00:11:22:33:44:55",
+                  "status":"aberta"
+                  
+                </strong>}
+                </p>
+                </p>
+              </div>
             </div>
+          </div>
+    
+          <!-- Pergunta 2 -->
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  O que fazer após a ocorrência de um erro na funcionalidade?
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+              <div class="card-body">
+                Verifique o código do erro.
+
+                <p>Veja nessa lista um conjunto de erros possíveis:</p>
+                <ul>
+                  <li>conflited_mac - Endereço MAC inválido.</li>
+                  <li>time_over - O tempo limite de conexão cessou.</li>
+                  <li>JSON_invalid - A mensagem JSON recebida está incompleta.</li>
+                  <li>Broken_msg - A mensagem recebida não está em JSON.</li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Adicione mais perguntas conforme necessário -->
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  O que fazer em outra situação?
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+              <div class="card-body">
+                Resposta para a pergunta 2.
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+    
+      </div>
+    
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% else %}
+<div class="d-flex justify-content-center align-items-center" style="height: 290px;">
+    <p>
+        <strong>Para acessar o sistema, é necessário estar logado em um perfil de servidor.</strong>
+    </p>
+</div>
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</script>
+<script src="{% static 'js/error_device.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 {% endblock %}

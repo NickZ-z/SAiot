@@ -15,6 +15,7 @@ SUAP - Sistema administrativo da Internet das Coisas
 
 {% if user.is_authenticated %}
 
+
 <div class="container mt-5 d-flex align-items-center ">
     <form id="filter-form" method="get">
         <div class="row ps-auto">
@@ -43,7 +44,7 @@ SUAP - Sistema administrativo da Internet das Coisas
                 <button id="btn-filter" type="submit"
                     class="btn btn-primary  d-flex align-items-center justify-content-center mt-2 ">Filtrar</button>
             </div>
-            <div  class=" w-auto col-md-8 d-flex align-items-center justify-content-end">
+            <div class=" w-auto col-md-8 d-flex align-items-center justify-content-end">
                 <a id="btn-add" href="{% url 'search_d'%}" type="submit"
                     class="btn btn-primary d-flex align-items-center justify-content-center w-100 mt-3 "> <Strong>+
                         Adicionar Dispositivo</Strong></a>
@@ -52,15 +53,17 @@ SUAP - Sistema administrativo da Internet das Coisas
     </form>
 </div>
 
+{% if devices %}
+
 <div class="container ">
-    <div  class="row owl-carousel owl-theme mt-5">
+    <div class="row owl-carousel owl-theme mt-5">
         {% for device in devices %}
         <form class="col">
             <div class="card-header cabeçalho w-auto">
-                PORTA {{ device.number_door }} <Strong> ({{ device.name }})</Strong>
+                PORTA {{ device.number_door|default:"Sem Numeração" }} <Strong> ({{ device.name|default:"Sem Nome" }})</Strong>
             </div>
             <div class="card mb-3">
-                
+
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="ip"><b>MAC:</b></div>
@@ -76,59 +79,71 @@ SUAP - Sistema administrativo da Internet das Coisas
                         <div class="d-flex justify-content-between">
                             <div class="funcao"><b>Status:</b></div>
                             {% if device.status == 'aberta'%}
-                            <div class="porta"><p style="color: rgb(0, 255, 72);" >Aberta</p></div>
+                            <div class="porta">
+                                <p style="color: rgb(0, 255, 72);">Aberta</p>
+                            </div>
                             {% elif device.status == 'fechada'%}
-                            <div class="porta"><p style="color: rgb(255, 0, 0);" >Fechada</p></div>
+                            <div class="porta">
+                                <p style="color: rgb(255, 0, 0);">Fechada</p>
+                            </div>
                             {%endif%}
                         </div>
-                        <div id="divItem{{device.id}}" style="background-color: red; color: white; border-radius: 5px;" class="escondido">
+                        <div id="divItem{{device.id}}" style="background-color: red; color: white; border-radius: 5px;"
+                            class="escondido">
                             Error: <p id="conflited_json_div_{{device.id}}" class="escondido">conflited_json</p>
                             <p id="JSON_invalid_div_{{device.id}}" class="escondido">JSON_invalid</p>
                             <p id="Broken_msg_div_{{device.id}}" class="escondido">Broken_msg</p>
                             <p id="time_over_div_{{device.id}}" class="escondido">time_over</p>
                             <p id="conflited_mac_div_{{device.id}}" class="escondido">conflited_mac</p>
-                            <a href="">Acesse essa página para suporte.</a>
+                            <a href="{% url 'faqs'%}">Acesse essa página para suporte.</a>
                         </div>
-                        
+
                     </div>
                 </div>
                 <ul class="nav nav-pills card-footer justify-content-between">
                     <li class="nav-item">
                         {% if device.status == 'fechada' %}
-                        <a data-item-id="{{ device.id }}" id="meu-botao" class="btn btn-success btn-sm btn-abrir" type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
+                        <a data-item-id="{{ device.id }}" id="meu-botao" class="btn btn-success btn-sm btn-abrir"
+                            type="button" data-toggle="tooltip" data-placement="top" title="Abrir">
                             <i class="fa fa-edit"></i> Abrir Porta
                         </a>
                         {% elif device.status == 'aberta' %}
-                            <a data-item-id="{{ device.id }}" id="meu-botao2" class="btn btn-danger btn-sm btn-deletar" type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
-                                <i class="fa fa-trash"></i> Fechar Porta
-                            </a>
-                            {%endif%}
+                        <a data-item-id="{{ device.id }}" id="meu-botao2" class="btn btn-danger btn-sm btn-deletar"
+                            type="button" data-toggle="tooltip" data-placement="top" title="Fechar">
+                            <i class="fa fa-trash"></i> Fechar Porta
+                        </a>
+                        {%endif%}
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary btn-sm btn-editar" href="{% url 'edit_door' device.id %}" type="button" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <a class="btn btn-primary btn-sm btn-editar" href="{% url 'edit_door' device.id %}"
+                            type="button" data-toggle="tooltip" data-placement="top" title="Editar">
                             <i class="fa fa-table"></i> Editar
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-danger btn-sm btn-deletar" href="{% url 'deletar_device' device.id %}" >
+                        <a class="btn btn-danger btn-sm btn-deletar" href="{% url 'deletar_device' device.id %}">
                             <i class="fa fa-trash"></i> Deletar
                         </a>
-                    
+
                     </li>
                 </ul>
             </div>
         </form>
-        
-      {% endfor %}
+
+        {% endfor %}
 
     </div>
 </div>
-
+{% else %}
+<div class="d-flex justify-content-center mt-5">
+    <p>Não existe nenhum dispositivo cadastrado.</p>
+</div>
+{% endif %}
 
 {% else %}
 <div class="d-flex justify-content-center align-items-center" style="height: 290px;">
     <p>
-        <strong>Para acessar o sistema, é necessário estar logado em um perfil de servidor.</strong>
+        <strong>Para acessar o sistema, é necessário estar logado em um perfil do SUAP.</strong>
     </p>
 </div>
 {% endif %}

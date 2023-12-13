@@ -81,7 +81,7 @@ def create_device(request):
                 door_instance.save()
                 return JsonResponse({'confirmation': True})
             else:
-                return JsonResponse({'confirmation': False})
+                return JsonResponse({'confirmation': 'conflited_mac'})
         else:
-            
-            return JsonResponse({'confirmation': False})
+            vd = verify_json(data)
+            return JsonResponse({'confirmation': vd})
