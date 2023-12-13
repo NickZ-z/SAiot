@@ -63,8 +63,9 @@ body {
 .logout-btn {
     background-color: #d9534f; /* Cor de fundo vermelha */
     color: #fff; /* Cor do texto branco */
-    border: none; /* Sem borda */
-    
+    border-style: solid;
+    border-width: 1px; /* Sem borda */
+    border-color: #e90800;
     border-radius: 5px; /* Borda arredondada */
     cursor: pointer; /* Cursor como ponteiro ao passar o mouse */
     transition: background-color 0.3s ease; /* Transição suave de cor de fundo */
@@ -104,7 +105,7 @@ footer a{
     font-weight: bold;
 }
 @media (max-width: 768px) {
-header a{ 
+header #link-header{ 
     display: none;
 }
 #perfil-div{

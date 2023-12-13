@@ -16,7 +16,7 @@ SUAP - Sistema administrativo da Internet das Coisas
 {% if user.is_authenticated %}
 
 
-<div class="container mt-5 d-flex align-items-center ">
+<div class="container mt-5 d-flex align-items-center justify-content-center p-0">
     <form id="filter-form" method="get">
         <div class="row ps-auto">
             <div class="col-md-auto mb-2">
@@ -39,6 +39,10 @@ SUAP - Sistema administrativo da Internet das Coisas
             <div class="col-md-auto mb-2">
                 <label for="room-filter">Nome da Sala:</label>
                 <input type="text" id="room-filter" name="room_filter" class="form-control">
+            </div>
+            <div class="col-md-auto mb-2">
+                <label for="room-filter">Número da Sala:</label>
+                <input type="number" id="room-filter" name="room_filter" class="form-control" style="width: 120px;">
             </div>
             <div class="col-md-auto d-flex align-items-center justify-content-center pt-2 ">
                 <button id="btn-filter" type="submit"

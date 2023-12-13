@@ -11,6 +11,18 @@
     transition: transform 0.3s ease;
 
 }
+#button_search2{
+    padding: 5px;
+    margin: 20px;
+    text-decoration: none;
+    background-color:#3498db;
+    border-radius: 7px;
+    border-style: none;
+    box-shadow: 2px 2px 2.5px rgb(46, 46, 46);
+    color: aliceblue;
+
+    transition: transform 0.3s ease;
+}
 .escondido {
     display: none;
     opacity: 0;
@@ -21,6 +33,10 @@
     opacity: 1;
 }
 #button_search:hover{
+    transform: scale(1.1); 
+    opacity: 100%;
+}
+#button_search2:hover{
     transform: scale(1.1); 
     opacity: 100%;
 }
