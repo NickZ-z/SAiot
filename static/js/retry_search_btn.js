@@ -36,7 +36,7 @@ $(document).ready(function () {
     }
 
     // Vincula a função ao evento de clique do botão
-    $('#button_search2').on('click', function () {
+    $('.button_search2').on('click', function () {
         myFunction();
     });
 });

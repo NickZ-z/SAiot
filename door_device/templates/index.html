@@ -27,11 +27,7 @@ SUAP - Sistema administrativo da Internet das Coisas
                     <option value="fechada">Fechada</option>
                 </select>
             </div>
-            <div class="col-md-auto mb-2">
-                <label for="port-filter">Função:</label>
-                <input type="text" id="room-filter" name="room_filter" class="form-control">
-                </select>
-            </div>
+            
             <div class="col-md-auto mb-2">
                 <label for="ip-filter">Buscar por endereço MAC:</label>
                 <input type="text" id="ip-filter" name="ip_filter" class="form-control">
@@ -41,8 +37,8 @@ SUAP - Sistema administrativo da Internet das Coisas
                 <input type="text" id="room-filter" name="room_filter" class="form-control">
             </div>
             <div class="col-md-auto mb-2">
-                <label for="room-filter">Número da Sala:</label>
-                <input type="number" id="room-filter" name="room_filter" class="form-control" style="width: 120px;">
+                <label for="port-filter">Número da Sala:</label>
+                <input type="number" id="port-filter" name="port_filter" class="form-control" style="width: 120px;">
             </div>
             <div class="col-md-auto d-flex align-items-center justify-content-center pt-2 ">
                 <button id="btn-filter" type="submit"
@@ -94,11 +90,11 @@ SUAP - Sistema administrativo da Internet das Coisas
                         </div>
                         <div id="divItem{{device.id}}" style="background-color: red; color: white; border-radius: 5px;"
                             class="escondido">
-                            Error: <p id="conflited_json_div_{{device.id}}" class="escondido">conflited_json</p>
-                            <p id="JSON_invalid_div_{{device.id}}" class="escondido">JSON_invalid</p>
-                            <p id="Broken_msg_div_{{device.id}}" class="escondido">Broken_msg</p>
-                            <p id="time_over_div_{{device.id}}" class="escondido">time_over</p>
-                            <p id="conflited_mac_div_{{device.id}}" class="escondido">conflited_mac</p>
+                            Error: <span id="conflited_json_div_{{device.id}}" class="escondido">conflited_json</span>
+                            <span id="JSON_invalid_div_{{device.id}}" class="escondido">JSON_invalid</span>
+                            <span id="Broken_msg_div_{{device.id}}" class="escondido">Broken_msg</span>
+                            <span id="time_over_div_{{device.id}}" class="escondido">time_over</span>
+                            <span id="conflited_mac_div_{{device.id}}" class="escondido">conflited_mac</span>
                             <a href="{% url 'faqs'%}">Acesse essa página para suporte.</a>
                         </div>
 

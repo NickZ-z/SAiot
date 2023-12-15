@@ -16,6 +16,7 @@ def index(request):
     status_filter = request.GET.get('status_filter', '')
     ip_filter = request.GET.get('ip_filter', '')
     room_filter = request.GET.get('room_filter', '')
+    function_filter = request.GET.get('function_filter', '')
     print(ip_filter)
     if port_filter:
         devices_on_door = devices_on_door.filter(number_door__icontains=port_filter)
@@ -27,6 +28,8 @@ def index(request):
     if room_filter:
 
         devices_on_door = devices_on_door.filter(name__exact=room_filter)
+    if function_filter:
+         devices_on_door = devices_on_door.filter(device__type=str(function_filter))
 
     return render(request,'index.html',{ 'devices':devices_on_door})
 @login_required

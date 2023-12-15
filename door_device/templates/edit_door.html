@@ -75,13 +75,13 @@
         <h2 class="div-title">Configurações registradas</h2>
         <div id="div1">
             <label for="name">Nome:</label>
-          <p>{{door.name}}</p>
+          <p>{{door.name|default:"Sem Nome"}}</p>
       
           <label for="mac" class="style-label">Endereço MAC:</label>
           <p>{{door.mac}}</p>
       
           <label for="number_door">Número da Porta:</label>
-          <p>{{door.number_door}}</p>
+          <p>{{door.number_door|default:"Sem Numeração"}}</p>
       
           <label for="status">Status:</label>
           <p>{{door.status}}</p>
