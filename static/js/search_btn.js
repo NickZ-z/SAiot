@@ -1,28 +1,24 @@
 $(document).ready(function () {
-    
+
     function myFunction() {
         $("#button_search").hide();
         $("#loading").show();
-       
+        var chave1 = $("#input_chave1").val();
+        var chave2 = $("#input_chave2").val();
+        console.log(chave1,chave2)
+        var dados = {
+            chave1: chave1,
+            chave2: chave2,
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        };
         $.ajax({
             url: '/confirm/', // URL da sua view Django que processará a confirmação
-            type: 'GET',       // Método HTTP, neste caso é um pedido GET
+            type: 'POST',       // Método HTTP, neste caso é um pedido GET
+            data: JSON.stringify(dados),
+            contentType: 'application/json',
             success: function (data) {
                 console.log(data.confirmation)
-                var data_views = data.confirmation
-                if (data_views === true) {
-                    console.log('????????')
-                    $("#loading").hide();
-                    $("#founded_device").show();
-                    $("#founded_device2").show();
-                } else {
-                    // Lógica para o caso em que a confirmação não foi recebida
-                    $("#loading").hide();
-                    $("#"+data_views).show();
-
-                    $("#button_search2").show();
-                    // Se desejar, você pode ocultar #loading aqui também
-                }
+                console.log("deu certo")
             },
             error: function (xhr, status, error) {
                 // Função chamada em caso de erro na requisição

@@ -10,6 +10,43 @@ SUAP - Sistema administrativo da Internet das Coisas
 <script src="{% static 'js/search_btn.js' %}"></script>
 <script src="{% static 'js/retry_search_btn.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/search.css' %}">
+<style>
+    .styled-input {
+            position: relative;
+            margin: 20px;
+        }
+
+        .styled-input input {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .styled-input input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .styled-input label {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 16px;
+            color: #999;
+            pointer-events: none;
+            transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+        }
+
+        .styled-input input:valid + label,
+        .styled-input input:focus + label {
+            transform: translateY(-20px);
+            font-size: 12px;
+            color: #3498db;
+        }
+</style>
 {% endblock %}
 
 
@@ -32,6 +69,7 @@ SUAP - Sistema administrativo da Internet das Coisas
 
             <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
                 <div class="card-body rounded" style="background-color: #d9d9d9; box-shadow: 1px 1px 3px #000000;">
+                    
                     <div class="d-flex justify-content-center">
                         <h2 class="card-title fw-bold">Localizar Dispositivos</h2>
                     </div>
@@ -43,9 +81,18 @@ SUAP - Sistema administrativo da Internet das Coisas
 
                         <div>
 
+                            {% csrf_token %}
 
-
-
+                            <div class="d-flex justify-content-center">
+                                <div class="styled-input">
+                                    <input type="text" id="input_chave1" required>
+                                    <label for="input_chave1">Chave 1</label>
+                                </div>
+                                <div class="styled-input">
+                                    <input type="text" id="input_chave2" required>
+                                    <label for="input_chave2">Chave 2</label>
+                                </div>
+                            </div>
                             <div class="m-5 d-flex justify-content-center" id="button_search_div">
                                 <button id="button_search">
                                     Localizar e <strong>Adicionar</strong> um dispositivo

@@ -63,25 +63,29 @@ def verify_json(data):
         return 'time_over'
     
 def create_device(request):
-        
-        Subscriber.run()
-        data = Subscriber.get_dataMQTT()
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
         
 
+        return JsonResponse({'confirmation': True})
+        #if verify_json(data) == True:
+        #   mac = str(data.get('mac'))
+        #    function_device = str(data.get('funcao'))
+        #   status = str(data.get('status'))
+        #    print(mac, function_device)
         
-        if verify_json(data) == True:
-            mac = str(data.get('mac'))
-            function_device = str(data.get('funcao'))
-            status = str(data.get('status'))
-            print(mac, function_device)
+         #   if is_valid_mac(mac) and function_device == 'Porta':
+          #      device = get_object_or_404(Device,type=function_device)
+           #     door_instance = Door.objects.create(mac=mac, status=status, device=device)
+            #    door_instance.save()
+                
+            #else:
+             #   return JsonResponse({'confirmation': 'conflited_mac'})
+       # else:
+        #    vd = verify_json(data)
+         #   return JsonResponse({'confirmation': vd})
         
-            if is_valid_mac(mac) and function_device == 'Porta':
-                device = get_object_or_404(Device,type=function_device)
-                door_instance = Door.objects.create(mac=mac, status=status, device=device)
-                door_instance.save()
-                return JsonResponse({'confirmation': True})
-            else:
-                return JsonResponse({'confirmation': 'conflited_mac'})
-        else:
-            vd = verify_json(data)
-            return JsonResponse({'confirmation': vd})
+    else:
+        print('deu ruim')
+        return JsonResponse({'confirmation': False})
