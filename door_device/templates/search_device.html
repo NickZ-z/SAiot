@@ -26,7 +26,7 @@ SUAP - Sistema administrativo da Internet das Coisas
         }
 
         .styled-input input:focus {
-            border-color: #3498db;
+            border-color: #57d16c;
             outline: none;
         }
 
@@ -44,7 +44,7 @@ SUAP - Sistema administrativo da Internet das Coisas
         .styled-input input:focus + label {
             transform: translateY(-20px);
             font-size: 12px;
-            color: #3498db;
+            color: #57d16c;
         }
 </style>
 {% endblock %}
@@ -86,12 +86,9 @@ SUAP - Sistema administrativo da Internet das Coisas
                             <div class="d-flex justify-content-center">
                                 <div class="styled-input">
                                     <input type="text" id="input_chave1" required>
-                                    <label for="input_chave1">Chave 1</label>
+                                    <label id= "label_chave1"for="label_chave1">Endereço MAC</label>
                                 </div>
-                                <div class="styled-input">
-                                    <input type="text" id="input_chave2" required>
-                                    <label for="input_chave2">Chave 2</label>
-                                </div>
+                               
                             </div>
                             <div class="m-5 d-flex justify-content-center" id="button_search_div">
                                 <button id="button_search">
